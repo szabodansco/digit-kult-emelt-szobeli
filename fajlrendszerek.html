@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Fájlrendszerek</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Fájlrendszerek jellemzői és összehasonlítása</h1>
+
+    <h3>1. A fájlrendszer fogalma és alapvető feladatai</h3>
+    <ul>
+        <li><strong>Definíció:</strong> Az operációs rendszer azon része, amely meghatározza, hogyan történik az adatok tárolása, elnevezése, rendszerezése és elérése a háttértárakon.</li>
+        <li><strong>Absztrakció:</strong> A fizikai szektorok és bitek halmaza fölé egy logikai struktúrát (könyvtárfát, fájlokat) hoz létre.</li>
+        <li><strong>Metaadatok:</strong> A fájl tartalmán kívüli kiegészítő információk tárolása (pl. név, méret, létrehozás dátuma, módosító, jogosultságok).</li>
+        <li><strong>Klaszter (Foglalási egység):</strong> A fájlrendszer által kezelt legkisebb logikai tárterület. Egy fájl legalább egy klasztert elfoglal, akkor is, ha a mérete csak 1 bájt (ez a tárolási veszteség).</li>
+    </ul>
+
+    <h3>2. FAT32, NTFS és ext4 összehasonlítása</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Jellemző / Tulajdonság</th>
+                <th>FAT32 (File Allocation Table)</th>
+                <th>NTFS (New Technology File System)</th>
+                <th>ext4 (Fourth Extended Filesystem)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Elsődleges OS</strong></td>
+                <td>MS-DOS, Windows 95/98 (ma pendrive-ok)</td>
+                <td>Modern Windows rendszerek (Windows NT-től)</td>
+                <td>Modern Linux disztribúciók</td>
+            </tr>
+            <tr>
+                <td><strong>Max. fájlméret</strong></td>
+                <td>**4 GiB** (Ennél nagyobb fájl nem másolható rá)</td>
+                <td>16 TiB (Elméleti limit: 8 PiB)</td>
+                <td>16 TiB</td>
+            </tr>
+            <tr>
+                <td><strong>Max. kötetméret</strong></td>
+                <td>2 TiB (Windows formázóval beépítve 32 GiB)</td>
+                <td>8 PiB (Elméleti limit: 8 PiB)</td>
+                <td>1 EiB (Exabájt)</td>
+            </tr>
+            <tr>
+                <td><strong>Jogosultságkezelés</strong></td>
+                <td>**Nincs.** Bárki mindent olvashat és írhat.</td>
+                <td>**Van.** Fejlett ACL (Access Control List) alapon.</td>
+                <td>**Van.** POSIX alapú (Tulajdonos/Csoport/Egyéb).</td>
+            </tr>
+            <tr>
+                <td><strong>Naplózás (Journaling)</strong></td>
+                <td>Nincs. Áramszünet esetén sérül a fájlrendszer.</td>
+                <td>Van. Védi a fájlrendszert a sérülésektől.</td>
+                <td>Van. Biztonságos és gyors helyreállítást nyújt.</td>
+            </tr>
+            <tr>
+                <td><strong>Kompatibilitás</strong></td>
+                <td>**Univerzális.** Minden OS írja és olvassa.</td>
+                <td>Windows (Írás/Olvasás), macOS/Linux (alapból csak Olvasás)</td>
+                <td>Linux (Írás/Olvasás), Windows/macOS (csak segédprogrammal)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. Jogosultságkezelés emelt szinten</h3>
+    <ul>
+        <li><strong>NTFS biztonság (Windows):</strong> Felhasználókhoz és csoportokhoz rendelhető hozzá, hogy egy fájlt vagy mappát Teljes hozzáféréssel, Módosítással, Olvasással és végrehajtással, vagy csak Írással érhetnek el. Támogatja az öröklődést (a szülőmappa jogai szállnak a gyerekfájlokra).</li>
+        <li><strong>ext4 biztonság (Linux):</strong> Minden fájlnak van egy **Tulajdonosa** és egy **Csoportja**. Három szinten határoz meg jogokat: *User (u)*, *Group (g)* és *Others (o)*. Mindhárom szinthez három bit tartozik: **Read (r)**, **Write (w)**, **Execute (x)**. Beállítása parancssorból a <code>chmod</code> paranccsal történik decimális vagy oktális kóddal (pl. a <code>755</code> jelentése: tulajdonos mindent megtehet (7=rwx), a csoport és mindenki más csak olvashatja és futtathatja (5=r-x)).</li>
+    </ul>
+
+    <h3>4. A Naplózás (Journaling) lényege</h3>
+    <ul>
+        <li><strong>Működése:</strong> A fájlrendszer a tényleges lemezműveletek (írás, törlés, áthelyezés) előtt egy külön állományba (a naplóba) feljegyzi a tervezett változtatásokat.</li>
+        <li><strong>Célja:</strong> Ha írás közben hirtelen áramszünet következik be, az operációs rendszer a következő indításkor a napló alapján másodpercek alatt képes visszaállítani a fájlrendszer konzisztens (sértetlen) állapotát, így elkerülhető a teljes lemezellenőrzés (chkdsk/fsck) és az adatvesztés.</li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
