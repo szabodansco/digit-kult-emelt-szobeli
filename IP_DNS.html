@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - IP címzés és DNS</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>IP címzés, IP verziók és a DNS működése</h1>
+
+    <h3>1. IPv4 és IPv6 összehasonlítása</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Jellemző</th>
+                <th>IPv4 (Internet Protocol version 4)</th>
+                <th>IPv6 (Internet Protocol version 6)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Címhossz</strong></td>
+                <td>32 bit (4 bájt)</td>
+                <td>128 bit (16 bájt)</td>
+            </tr>
+            <tr>
+                <td><strong>Címtér mérete</strong></td>
+                <td>Kb. 4,3 milliárd egyedi cím (elfogyott)</td>
+                <td>Kb. 3,4 &times; 10<sup>38</sup> cím (gyakorlatilag végtelen)</td>
+            </tr>
+            <tr>
+                <td><strong>Ábrázolás</strong></td>
+                <td>Pontokkal elválasztott decimális (pl. <code>192.168.1.1</code>)</td>
+                <td>Kettőspontokkal elválasztott hexadecimális (pl. <code>2001:db8::1</code>)</td>
+            </tr>
+            <tr>
+                <td><strong>Felépítés</strong></td>
+                <td>4 darab, egyenként 8 bites tag (oktet). Értéke: 0 - 255.</td>
+                <td>8 darab, egyenként 16 bites csoport. A nullák elhagyhatók (<code>::</code>).</td>
+            </tr>
+            <tr>
+                <td><strong>Biztonság / Konfiguráció</strong></td>
+                <td>Kézi vagy DHCP konfiguráció; az IPSec opcionális.</td>
+                <td>Automatikus konfiguráció (SLAAC); beépített IPSec biztonság.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>2. Alhálózati maszkok és CIDR</h3>
+    <ul>
+        <li><strong>Alhálózati maszk feladata:</strong> Megmutatja, hogy egy IPv4 címből melyik rész azonosítja a hálózatot (Network ID) és melyik a konkrét eszközt (Host ID). Ahol a maszk binárisan 1-es, az a hálózati rész, ahol 0, az a gép azonosítója.</li>
+        <li><strong>Működése (AND művelet):</strong> A router a cél IP-címet és az alhálózati maszkot bitenkénti logikai ÉS (AND) művelettel veti össze, hogy meghatározza, a csomag a helyi hálózatra vagy egy külső hálózatra irányul-e.</li>
+        <li><strong>CIDR jelölés (Classless Inter-Domain Routing):</strong> A maszk tömörített formája. A perjel utáni szám az 1-es bitek számát jelzi (pl. <code>255.255.255.0</code> helyett <code>/24</code>).</li>
+    </ul>
+
+    <h3>3. Publikus vs. Privát IP címek és a NAT</h3>
+    <ul>
+        <li><strong>Publikus IP cím:</strong> Az interneten egyedi, globálisan irányítható cím. Ezzel kommunikálnak a nyilvános szerverek és a routerek külső (WAN) interfészei.</li>
+        <li><strong>Privát IP cím:</strong> Csak helyi hálózatokon (LAN) belüli használatra fenntartott, ingyenesen osztható címtartomány. Az interneten nem irányíthatók (nem látszanak kívülről). Főbb tartományok:
+            <ul>
+                <li>A osztály: <code>10.0.0.0 – 10.255.255.255</code></li>
+                <li>B osztály: <code>172.16.0.0 – 172.31.255.255</code></li>
+                <li>C osztály: <code>192.168.0.0 – 192.168.255.255</code></li>
+            </ul>
+        </li>
+        <li><strong>NAT (Network Address Translation):</strong> Mivel az IPv4 címek elfogytak, az otthoni router a NAT technológiával a belső, privát IP-vel rendelkező eszközök (pl. telefon, PC) forgalmát lefordítja a router egyetlen kapott publikus IP címére, így osztoznak az interneten.</li>
+    </ul>
+
+    <h3>4. A DNS (Domain Name System) működése</h3>
+    <ul>
+        <li><strong>Alapvető feladat:</strong> Az internet telefonkönyve. A felhasználók által könnyen megjegyezhető doménneveket (pl. <code>oktatas.hu</code>) lefordítja a számítógépek által értelmezhető IP címekre (pl. <code>195.199.250.31</code>).</li>
+        <li><strong>Hierarchikus felépítés (Fa struktúra):</strong>
+            <ul>
+                <li><strong>Gyökér szerverek (Root):</strong> A struktúra teteje (jelölése a pont a név végén).</li>
+                <li><strong>TLD szerverek (Top-Level Domain):</strong> Legfelső szintű tartományok (pl. nemzeti: <code>.hu</code>, <code>.uk</code>; nemzetközi: <code>.com</code>, <code>.org</code>).</li>
+                <li><strong>Autoritatív (Irányadó) névszerverek:</strong> A konkrét domén bejegyzéseit és a hozzá tartozó valódi IP címeket tartalmazó szerverek.</li>
+            </ul>
+        </li>
+        <li><strong>A lekérdezés menete (Rekurzív folyamat):</strong> Ha a gép nem tudja a címet (és nincs a helyi cache-ben), megkérdezi a helyi DNS feloldót (Recursive Resolver / pl. a szolgáltatóé vagy a Google 8.8.8.8 szervere). Ez a feloldó végigjárja a fát: megkérdezi a Gyökér szervert &rarr; az továbbküldi a TLD szerverhez &rarr; az továbbküldi az Autoritatív szerverhez, ami visszaadja a pontos IP címet.</li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
