@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Tárkapacitás és memória</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 20px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 5px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 14px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 4px 8px;
+            margin-top: 12px;
+            margin-bottom: 6px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 4px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        .footer {
+            margin-top: 20px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 5px;
+            font-size: 11px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tárkapacitás és memória: Elsődleges és másodlagos tárolók</h1>
+
+    <h3>1. Alapfogalmak és az adattárolás hierarchiája</h3>
+    <ul>
+        <li><strong>Tárkapacitás egységei:</strong> A legkisebb egység a bit (0 vagy 1), 8 bit alkot 1 bájtot (B). Váltószámok: 1024 (KiB, MiB, GiB, TiB).</li>
+        <li><strong>Memóriahierarchia elve:</strong> Minél közelebb van egy tároló a CPU-hoz, annál gyorsabb, kisebb kapacitású és drágább (regiszter &rarr; cache &rarr; RAM &rarr; háttértár).</li>
+        <li><strong>Adatelérési módok:</strong> Közvetlen (tetszőleges) elérésű memóriák (RAM) vs. soros/szekvenciális elérésű tárolók (pl. mágnesszalag).</li>
+    </ul>
+
+    <h3>2. Elsődleges tárolók (Belső memória)</h3>
+    <ul>
+        <li><strong>RAM (Random Access Memory):</strong> Írható és olvasható operatív memória. Ideiglenes tároló: a számítógép kikapcsolásakor a tartalma elveszik (felejtő memória). Ezen futnak az operációs rendszer és az aktív programok folyamatai.</li>
+        <li><strong>ROM (Read Only Memory):</strong> Csak olvasható memória. Tartalmát a gyártás során kapja meg, nem felejtő (áramtalanítás után is megmarad). Tipikus alkalmazása: az alaplapi UEFI/BIOS chipek, amelyek a számítógép indításáért (POST folyamat) felelnek.</li>
+    </ul>
+
+    <h3>3. Másodlagos tárolók (Háttértárak)</h3>
+    <ul>
+        <li><strong>HDD (Hard Disk Drive):</strong> Mágneses elvű háttértár. Forgó fémlemezekből és mozgó író-olvasó fejből áll. Mechanikus felépítése miatt rázkódásra érzékeny, lassabb (fizikai keresési idő), de nagy kapacitást nyújt olcsón.</li>
+        <li><strong>SSD (Solid State Drive):</strong> Elektronikus elvű, mozgó alkatrész nélküli háttértár. Flash memória (NAND) technológiát használ. Hangtalan, ütésálló, elhanyagolható a keresési ideje, és nagyságrendekkel gyorsabb, mint a HDD.</li>
+        <li><strong>Optikai tárolók:</strong> Lézersugárral írt és olvasott lemezek (CD, DVD, Blu-ray). A polikarbonát rétegen lévő apró bemélyedések (pittek) és sík felületek (landek) hordozzák a bináris információt. Ma már főként archiválásra használatosak.</li>
+    </ul>
+
+    <h3>4. Interfészek és protokollok: NVMe vs. SATA</h3>
+    <ul>
+        <li><strong>SATA (Serial ATA):</strong> Eredetileg mechanikus HDD-khez tervezett interfész és az ahhoz tartozó AHCI protokoll. Elméleti maximális sebessége kb. 600 MB/s (SATA III). Szűk keresztmetszetet jelent a modern flash memóriáknak.</li>
+        <li><strong>NVMe (Non-Volatile Memory Express):</strong> Kifejezetten SSD-khez és flash alapú tároláshoz kifejlesztett logikai interfész protokoll. A processzorhoz közvetlenül kapcsolódó PCIe (PCI Express) buszrendszert használja.</li>
+        <li><strong>Sebességbeli különbség:</strong> Míg egy SATA SSD 500-550 MB/s sebességre képes, egy modern NVMe (PCIe Gen4/Gen5) SSD elérheti a 3500-14000 MB/s sebességet is.</li>
+        <li><strong>Párhuzamosság:</strong> A SATA (AHCI) 1 parancssort kezel 32 paranccsal. Az NVMe akár 64 000 parancssort képes kezelni, soronként 64 000 paranccsal, ami drasztikusan javítja a többmagos processzorok melletti teljesítményt.</li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
