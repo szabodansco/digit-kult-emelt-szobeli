@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - 1. Hardver architektúrák</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 20px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 5px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 14px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 4px 8px;
+            margin-top: 12px;
+            margin-bottom: 6px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 4px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        .footer {
+            margin-top: 20px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 5px;
+            font-size: 11px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>1. Hardver architektúrák: Neumann-elvek és mai cáfolataik</h1>
+
+    <h3>1. A klasszikus Neumann-elvek</h3>
+    <ul>
+        <li><strong>Soros végrehajtás:</strong> Az utasítások feldolgozása egymás után, időben elkülönítve történik.</li>
+        <li><strong>Kettes számrendszer:</strong> Minden adat és utasítás bináris formában (0 és 1) tárolódik.</li>
+        <li><strong>Belső memória (tárolt program elve):</strong> Az adatok és az azokat kezelő programok ugyanabban a memóriában vannak.</li>
+        <li><strong>Teljesen elektronikus működés:</strong> Mechanikus elemek nélkül, elektronikus kapukkal épül fel.</li>
+        <li><strong>Univerzális gép:</strong> A hardver funkcióját nem a huzalozás, hanem a betöltött szoftver határozza meg.</li>
+        <li><strong>Alapvető funkcionális egységek:</strong> Vezérlőegység, aritmetikai-logikai egység, memória, be-/kimeneti egységek.</li>
+    </ul>
+
+    <h3>2. A CPU felépítése és a buszrendszerek</h3>
+    <ul>
+        <li><strong>CU (Control Unit):</strong> Vezérlőegység. Ütemezi a munkát, dekódolja az utasításokat, irányítja a hardvert.</li>
+        <li><strong>ALU (Arithmetic Logic Unit):</strong> Aritmetikai és Logikai Egység. Elvégzi a matematikai és logikai műveleteket.</li>
+        <li><strong>Regiszterek:</strong> A CPU-n belüli, ultra-gyors, kisméretű ideiglenes tárolók (pl. PC, IR, Akkumulátor).</li>
+        <li><strong>Buszrendszer fogalma:</strong> Közös vezetékrendszer a rendszeregységek közötti adatcserére.</li>
+        <li><strong>Adatbusz:</strong> Kétirányú vezeték. Ezen utaznak a tényleges adatok a CPU, a RAM és a perifériák között.</li>
+        <li><strong>Címbusz:</strong> Egyirányú vezeték. A CPU ezen küldi ki a megcímzett memóriahely vagy eszköz azonosítóját.</li>
+        <li><strong>Vezérlőbusz:</strong> Kétirányú vezeték. Státuszjeleket és parancsokat (pl. írás/olvasás, megszakításkérés) továbbít.</li>
+    </ul>
+
+    <h3>3. A Neumann-elvek mai cáfolatai és korlátai</h3>
+    <ul>
+        <li><strong>Neumann-szűkkeresztmetszet:</strong> A közös adat- és utasításbusz miatt a CPU-RAM közötti sebességkülönbség lassítja a rendszert.</li>
+        <li><strong>Harvard-architektúra:</strong> A mai processzorok gyorsítótárai (L1 Cache) külön választják az adat- és utasításmemóriát.</li>
+        <li><strong>Párhuzamos feldolgozás:</strong> A tiszta soros végrehajtás megszűnt; egyszerre több folyamat fut a gépen.</li>
+        <li><strong>Nem-felejtő memóriák (NVRAM / SSD):</strong> Elmossa a határt a háttértár és a műveleti memória (RAM) között.</li>
+        <li><strong>Neuromorf és kvantumszámítógépek:</strong> Elvetik a kettes számrendszert és a klasszikus logikai kapukat.</li>
+    </ul>
+
+    <h3>4. Modern párhuzamos feldolgozás</h3>
+    <ul>
+        <li><strong>Többmagos architektúra (Multicore):</strong> Egy fizikai szilíciumlapkára több önálló CPU-magot integrálnak.</li>
+        <li><strong>Utasításszintű párhuzamosság (Csővezeték/Pipelining):</strong> Az utasítások fázisait (beolvasás, dekódolás, végrehajtás) átfedve végzik.</li>
+        <li><strong>Szupervonalas (Superscalar) felépítés:</strong> Egy órajelciklus alatt több különálló utasítást is végrehajt a CPU.</li>
+        <li><strong>Fonal szintű párhuzamosság (Hyper-Threading):</strong> Egy fizikai mag két logikai szálat kezel, jobban kihasználva az ALU-t.</li>
+        <li><strong>Masszív párhuzamosság (GPU):</strong> Több ezer egyszerűsített mag dolgozik egyszerre (grafika, MI, bányászat).</li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
