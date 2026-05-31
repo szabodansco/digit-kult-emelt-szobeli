@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emelt Digitális Kultúra Tétel - IP címzés és DNS</title>
+    <title>Emelt Digitális Kultúra Tétel - Az operációs rendszer feladatai</title>
     <style>
         @page {
             size: A4;
@@ -79,78 +79,71 @@
 </head>
 <body>
 
-    <h1>IP címzés, IP verziók és a DNS működése</h1>
+    <h1>Az operációs rendszer feladatai és felhasználói felületei</h1>
 
-    <h3>1. IPv4 és IPv6 összehasonlítása</h3>
+    <h3>1. Az operációs rendszer (OS) fogalma és szerepe</h3>
+    <ul>
+        <li><strong>Definíció:</strong> Olyan szoftverrendszer, amely közvetíti a kapcsolatot a számítógép hardvere és a felhasználó, illetve az alkalmazások között. Alapvető célja a hardver hatékony kezelése és a biztonságos futtatókörnyezet biztosítása.</li>
+        <li><strong>Fő komponensek:</strong> A **kernel** (mag), amely közvetlenül a hardverrel kommunikál, és a **héj** (shell / felhasználói felület), amely a külvilággal tartja a kapcsolatot.</li>
+    </ul>
+
+    <h3>2. Erőforrás-kezelés és hardverabsztrakció</h3>
+    <ul>
+        <li><strong>Processzorkezelés:</strong> Az OS osztja el a CPU idejét a futó programok között (ütemezés).</li>
+        <li><strong>Memóriakezelés:</strong> Allokálja (kiosztja) a RAM-ot a programoknak. Megakadályozza, hogy a folyamatok egymás memóriaterületére írjanak. Kezeli a **virtuális memóriát** (ha elfogy a RAM, a háttértár egy részét /lapozófájl/ használja).</li>
+        <li><strong>Perifériakezelés:</strong> Az OS az **eszközillesztő programokon** (driver) keresztül egységes interfészt biztosít a hardverekhez. Az alkalmazásoknak nem kell ismerniük a konkrét nyomtató vagy videókártya belső működését.</li>
+        <li><strong>Fájlrendszer-kezelés:</strong> Absztrakt struktúrát (mappák, fájlok) hoz létre a fizikai szektorokon tárolt bitek fölé, kezeli a hozzáférési jogosultságokat és a metaadatokat (pl. NTFS, ext4).</li>
+    </ul>
+
+    <h3>3. Folyamatkezelés (Process Management)</h3>
+    <ul>
+        <li><strong>Program vs. Folyamat:</strong> A program egy passzív adathalmaz a háttértáron (pl. egy .exe fájl). A folyamat (process) egy **végrehajtás alatt álló program**, amelynek saját memóriaterülete, CPU-állapota és erőforrásai vannak.</li>
+        <li><strong>Multitasking (Többfeladatosság):</strong> A mai rendszerek egyszerre több folyamatot futtatnak.
+            <ul>
+                <li><strong>Kooperatív:</strong> A folyamatok maguk adják át a vezérlést (régi rendszerek, instabil).</li>
+                <li><strong>Preemptív (Megszakításos):</strong> Az operációs rendszer időszeletekre osztja a CPU-t, és bármikor erőszakkal megszakíthat egy folyamatot, hogy egy másiknak adjon időt. Ez biztosítja a rendszer stabilitását.</li>
+            </ul>
+        </li>
+        <li><strong>Szálak (Threads):</strong> A folyamaton belüli kisebb végrehajtási egységek, amelyek osztoznak a folyamat memóriáján, így gyorsabban kommunikálnak egymással (pl. egy böngésző külön szálon tölti a képet és külön szálon futtatja a szkripteket).</li>
+    </ul>
+
+    <h3>4. Felhasználói felületek összehasonlítása (CLI vs. GUI)</h3>
     <table>
         <thead>
             <tr>
-                <th>Jellemző</th>
-                <th>IPv4 (Internet Protocol version 4)</th>
-                <th>IPv6 (Internet Protocol version 6)</th>
+                <th>Szempont</th>
+                <th>CLI (Command Line Interface) - Parancssoros felület</th>
+                <th>GUI (Graphical User Interface) - Grafikus felület</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><strong>Címhossz</strong></td>
-                <td>32 bit (4 bájt)</td>
-                <td>128 bit (16 bájt)</td>
+                <td><strong>Működési elv</strong></td>
+                <td>Szöveges parancsok beírása billentyűzettel (pl. Bash, Windows Command Prompt/PowerShell).</td>
+                <td>Vizuális elemek (WIMP: Windows, Icons, Menus, Pointer) vezérlése egérrel vagy érintéssel.</td>
             </tr>
             <tr>
-                <td><strong>Címtér mérete</strong></td>
-                <td>Kb. 4,3 milliárd egyedi cím (elfogyott)</td>
-                <td>Kb. 3,4 &times; 10<sup>38</sup> cím (gyakorlatilag végtelen)</td>
+                <td><strong>Erőforrás-igény</strong></td>
+                <td>**Rendkívül alacsony.** Minimális RAM és CPU elegendő a futtatásához.</td>
+                <td>**Magas.** Jelentős grafikus (GPU) teljesítményt és memóriát igényel a felület kirajzolása.</td>
             </tr>
             <tr>
-                <td><strong>Ábrázolás</strong></td>
-                <td>Pontokkal elválasztott decimális (pl. <code>192.168.1.1</code>)</td>
-                <td>Kettőspontokkal elválasztott hexadecimális (pl. <code>2001:db8::1</code>)</td>
+                <td><strong>Tanulhatóság</strong></td>
+                <td>Nehéz. Pontosan ismerni kell a parancsok nevét, szintaxisát és kapcsolóit.</td>
+                <td>Könnyű, intuitív. A felhasználó látja a lehetőségeket, és azonnali vizuális visszajelzést kap.</td>
             </tr>
             <tr>
-                <td><strong>Felépítés</strong></td>
-                <td>4 darab, egyenként 8 bites tag (oktet). Értéke: 0 - 255.</td>
-                <td>8 darab, egyenként 16 bites csoport. A nullák elhagyhatók (<code>::</code>).</td>
+                <td><strong>Hatékonyság</strong></td>
+                <td>Profi szinten **ultra gyors**. Szkriptekkel a bonyolult, ismétlődő feladatok könnyen automatizálhatók.</td>
+                <td>Lassabb komplex feladatoknál. Az automatizálás nehézkes, sok kattintást igényel.</td>
             </tr>
             <tr>
-                <td><strong>Biztonság / Konfiguráció</strong></td>
-                <td>Kézi vagy DHCP konfiguráció; az IPSec opcionális.</td>
-                <td>Automatikus konfiguráció (SLAAC); beépített IPSec biztonság.</td>
+                <td><strong>Alkalmazási terület</strong></td>
+                <td>Szerverek üzemeltetése, programozás, hálózati eszközök konfigurálása, rendszergazdai feladatok.</td>
+                <td>Átlagos felhasználói környezet, irodai munka, játékok, multimédiás tartalomfogyasztás.</td>
             </tr>
         </tbody>
     </table>
-
-    <h3>2. Alhálózati maszkok és CIDR</h3>
-    <ul>
-        <li><strong>Alhálózati maszk feladata:</strong> Megmutatja, hogy egy IPv4 címből melyik rész azonosítja a hálózatot (Network ID) és melyik a konkrét eszközt (Host ID). Ahol a maszk binárisan 1-es, az a hálózati rész, ahol 0, az a gép azonosítója.</li>
-        <li><strong>Működése (AND művelet):</strong> A router a cél IP-címet és az alhálózati maszkot bitenkénti logikai ÉS (AND) művelettel veti össze, hogy meghatározza, a csomag a helyi hálózatra vagy egy külső hálózatra irányul-e.</li>
-        <li><strong>CIDR jelölés (Classless Inter-Domain Routing):</strong> A maszk tömörített formája. A perjel utáni szám az 1-es bitek számát jelzi (pl. <code>255.255.255.0</code> helyett <code>/24</code>).</li>
-    </ul>
-
-    <h3>3. Publikus vs. Privát IP címek és a NAT</h3>
-    <ul>
-        <li><strong>Publikus IP cím:</strong> Az interneten egyedi, globálisan irányítható cím. Ezzel kommunikálnak a nyilvános szerverek és a routerek külső (WAN) interfészei.</li>
-        <li><strong>Privát IP cím:</strong> Csak helyi hálózatokon (LAN) belüli használatra fenntartott, ingyenesen osztható címtartomány. Az interneten nem irányíthatók (nem látszanak kívülről). Főbb tartományok:
-            <ul>
-                <li>A osztály: <code>10.0.0.0 – 10.255.255.255</code></li>
-                <li>B osztály: <code>172.16.0.0 – 172.31.255.255</code></li>
-                <li>C osztály: <code>192.168.0.0 – 192.168.255.255</code></li>
-            </ul>
-        </li>
-        <li><strong>NAT (Network Address Translation):</strong> Mivel az IPv4 címek elfogytak, az otthoni router a NAT technológiával a belső, privát IP-vel rendelkező eszközök (pl. telefon, PC) forgalmát lefordítja a router egyetlen kapott publikus IP címére, így osztoznak az interneten.</li>
-    </ul>
-
-    <h3>4. A DNS (Domain Name System) működése</h3>
-    <ul>
-        <li><strong>Alapvető feladat:</strong> Az internet telefonkönyve. A felhasználók által könnyen megjegyezhető doménneveket (pl. <code>oktatas.hu</code>) lefordítja a számítógépek által értelmezhető IP címekre (pl. <code>195.199.250.31</code>).</li>
-        <li><strong>Hierarchikus felépítés (Fa struktúra):</strong>
-            <ul>
-                <li><strong>Gyökér szerverek (Root):</strong> A struktúra teteje (jelölése a pont a név végén).</li>
-                <li><strong>TLD szerverek (Top-Level Domain):</strong> Legfelső szintű tartományok (pl. nemzeti: <code>.hu</code>, <code>.uk</code>; nemzetközi: <code>.com</code>, <code>.org</code>).</li>
-                <li><strong>Autoritatív (Irányadó) névszerverek:</strong> A konkrét domén bejegyzéseit és a hozzá tartozó valódi IP címeket tartalmazó szerverek.</li>
-            </ul>
-        </li>
-        <li><strong>A lekérdezés menete (Rekurzív folyamat):</strong> Ha a gép nem tudja a címet (és nincs a helyi cache-ben), megkérdezi a helyi DNS feloldót (Recursive Resolver / pl. a szolgáltatóé vagy a Google 8.8.8.8 szervere). Ez a feloldó végigjárja a fát: megkérdezi a Gyökér szervert &rarr; az továbbküldi a TLD szerverhez &rarr; az továbbküldi az Autoritatív szerverhez, ami visszaadja a pontos IP címet.</li>
-    </ul>
 
     <div class="footer">
         Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
