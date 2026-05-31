@@ -123,7 +123,7 @@
     <ul>
         <li><strong>Alhálózati maszk feladata:</strong> Megmutatja, hogy egy IPv4 címből melyik rész azonosítja a hálózatot (Network ID) és melyik a konkrét eszközt (Host ID). Ahol a maszk binárisan 1-es, az a hálózati rész, ahol 0, az a gép azonosítója.</li>
         <li><strong>Működése (AND művelet):</strong> A router a cél IP-címet és az alhálózati maszkot bitenkénti logikai ÉS (AND) művelettel veti össze, hogy meghatározza, a csomag a helyi hálózatra vagy egy külső hálózatra irányul-e.</li>
-        <li><strong>CIDR jelölés (Classless Inter-Domain Routing):</strong> A maszk tömörített formája. The number of addresses of a network may be calculated as 2address length − prefix length, where "address length" is 128 for IPv6 and 32 for IPv4. For example, in IPv4, the prefix length /29 gives: 232−29 = 23 = 8 addresses. (pl. <code>255.255.255.0</code> helyett <code>/24</code>).</li>
+        <li><strong>CIDR jelölés (Classless Inter-Domain Routing):</strong> A maszk tömörített formája. The number of addresses of a network may be calculated as 2^address length − prefix length, where "address length" is 128 for IPv6 and 32 for IPv4. For example, in IPv4, the prefix length /29 gives: 2^32−2^9 = 2^3 = 8 addresses. (pl. <code>255.255.255.0</code> helyett <code>/24</code>).</li>
     </ul>
 
     <h3>3. Publikus vs. Privát IP címek és a NAT</h3>
