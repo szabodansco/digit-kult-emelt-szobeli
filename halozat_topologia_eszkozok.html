@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Hálózati topológiák és eszközök</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Hálózati topológiák és hálózati eszközök feladatai</h1>
+
+    <h3>1. Alapfogalmak</h3>
+    <ul>
+        <li><strong>Hálózati topológia:</strong> A hálózatba kötött eszközök (csomópontok) fizikai vagy logikai elrendezési struktúrája.</li>
+        <li><strong>Adatátviteli módok:</strong> Szimplex (egyirányú, pl. rádió), Half-duplex (felváltva kétirányú, pl. adóvevő) és Full-duplex (egyidejűleg kétirányú, pl. telefon/modern LAN).</li>
+        <li><strong>Címzések a hálózatban:</strong> MAC cím (fizikai cím, fixen a hálózati kártyában) és IP cím (logikai cím, hálózati azonosításhoz).</li>
+    </ul>
+
+    <h3>2. Hálózati fizikai topológiák összehasonlítása</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Jellemző</th>
+                <th>Sín (Bus) topológia</th>
+                <th>Gyűrű (Ring) topológia</th>
+                <th>Csillag (Star) topológia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Szerkezet</strong></td>
+                <td>A gépek egy közös fővezetékre (gerincre) csatlakoznak. A végeken lezáró (terminátor) van.</td>
+                <td>Az eszközök zárt láncot alkotnak, minden gép a két szomszédjához kapcsolódik.</td>
+                <td>Minden végpont közvetlenül egy központi elosztó eszközhöz kapcsolódik.</td>
+            </tr>
+            <tr>
+                <td><strong>Adattovábbítás</strong></td>
+                <td>Az adat minden géphez eljut (mindenki veszi), de csak a címzett dolgozza fel.</td>
+                <td>Az adat egy irányba körbejár (token/vezérjel segítségével), amíg el nem éri a célt.</td>
+                <td>A központi eszköz fogadja az adatot, majd továbbküldi a megfelelő célállomás felé.</td>
+            </tr>
+            <tr>
+                <td><strong>Hibaérzékenység</strong></td>
+                <td>Kábel szakadásakor a **teljes hálózat leáll**, mivel megszűnik a lezárás.</td>
+                <td>Egyetlen gép vagy kábel meghibásodása a **teljes hálózatot megbénítja**.</td>
+                <td>Egy végponti kábel hibája csak azt az egy gépet érinti. **A hálózat többi része működik.**</td>
+            </tr>
+            <tr>
+                <td><strong>Bővíthetőség</strong></td>
+                <td>Egyszerű, de a kábelhossz és a gépek száma korlátozott a jeltorzulás miatt.</td>
+                <td>Nehézkes, mert a bővítés idejére meg kell szakítani a gyűrűt (leáll a hálózat).</td>
+                <td>Nagyon egyszerű, csak be kell dugni az új eszközt a központi egység egy szabad portjába.</td>
+            </tr>
+            <tr>
+                <td><strong>Mai státusz</strong></td>
+                <td>**Elavult.** Régi koaxiális hálózatoknál használták (10Base2).</td>
+                <td>**Ritka.** Speciális ipari vagy FDDI/Token Ring hálózatoknál fordult elő.</td>
+                <td>**Domináns.** A mai modern vezetékes (Ethernet) és vezeték nélküli hálózatok alapja.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. Kulcsfontosságú hálózati eszközök és feladataik</h3>
+    <ul>
+        <li><strong>Switch (Kapcsoló):</strong> 
+            <ul>
+                <li>Helyi hálózaton (LAN) belüli eszközök összekapcsolására szolgál (adatkapcsolati réteg / Layer 2).</li>
+                <li>Megtanulja a csatlakoztatott eszközök **MAC címeit**, és az adatcsomagokat (kereteket) célzottan csak annak a portnak továbbítja, amelyen a címzett található. Ezzel megszünteti az ütközéseket és növeli a sávszélességet.</li>
+            </ul>
+        </li>
+        <li><strong>Router (Útvonalválasztó):</strong> 
+            <ul>
+                <li>Különböző hálózatok (pl. az otthoni LAN és az internet/WAN) összekapcsolására szolgál (hálózati réteg / Layer 3).</li>
+                <li>**IP címek** alapján dolgozik. Meghatározza az adatcsomagok számára a legoptimálisabb útvonalat a hálózatok között.</li>
+                <li>Gyakran végez NAT (hálózati címfordítás) feladatot, amivel egyetlen nyilvános IP címet oszt meg több belső eszköz között.</li>
+            </ul>
+        </li>
+        <li><strong>Access Point (AP / Vezeték nélküli hozzáférési pont):</strong> 
+            <ul>
+                <li>A vezetékes hálózatot terjeszti ki vezeték nélkülivé (WLAN / Wi-Fi).</li>
+                <li>A rádióhullámokon érkező digitális jeleket elektromos jelekké alakítja a vezetékes hálózat (Ethernet) számára, és fordítva. Önmagában nem oszt IP címet és nem választ útvonalat (hacsak nincs egybeépítve routerrel).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>4. Vizsgáztatói csapda: Az "Otthoni Router" fogalma</h3>
+    <ul>
+        <li>A boltokban kapható "otthoni Wi-Fi router" valójában egy **kombinált eszköz**.</li>
+        <li>Egyetlen dobozban tartalmaz egy **Routert** (az internet csatlakozáshoz), egy többportos **Switchet** (a vezetékes gépeknek) és egy **Access Pointot** (a Wi-Fi szóráshoz). A szóbeli feleleten ezeket a funkciókat mérnöki pontossággal külön kell választani!</li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
