@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Jogosultságok és biztonság</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Jogosultságok, felhasználói szintek és titkosítási eljárások</h1>
+
+    <h3>1. Felhasználói szintek az operációs rendszerben</h3>
+    <ul>
+        <li><strong>Standard Felhasználó (User):</strong> Korlátozott jogkörrel rendelkező fiók. Csak a saját mappájában írhat/olvashat, futtathat programokat, de nem módosíthatja a rendszerfájlokat, hálózati beállításokat, és nem telepíthet a teljes gépet érintő szoftvereket.</li>
+        <li><strong>Rendszergazda (Adminisztrátor / Root):</strong> Teljes, korlátlan hozzáférés a számítógép felett. Linux rendszereken a neve **root**. Bármilyen fájlt törölhet, módosíthat, szoftvereket telepíthet, és kezelheti más felhasználók fiókjait.</li>
+        <li><strong>Biztonsági mechanizmusok (UAC / Sudo):</strong> A modern rendszerek védik a felhasználót a véletlen károkozástól vagy kártevőktől.
+            <ul>
+                <li>**Windows (UAC - User Account Control):** Rendszergazdai jogot igénylő műveletnél elsötétíti a képernyőt és megerősítést (vagy jelszót) kér a felhasználótól.</li>
+                <li>**Linux (sudo):** Parancssorban a <code>sudo</code> (superuser do) előtaggal a normál felhasználó ideiglenesen root joggal futtathat egyetlen parancsot, ha megadja a saját jelszavát.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>2. Titkosítási eljárások összehasonlítása</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Szempont / Tulajdonság</th>
+                <th>Szimmetrikus kulcsú titkosítás</th>
+                <th>Aszimmetrikus kulcsú titkosítás (Nyilvános kulcsú)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Kulcsok száma</strong></td>
+                <td>**Egyetlen, titkos kulcs** van.</td>
+                <td>**Kulcspár** van: egy nyilvános (Public) és egy titkos (Private) kulcs.</td>
+            </tr>
+            <tr>
+                <td><strong>Működési elv</strong></td>
+                <td>Ugyanazzal a kulccsal történik a kódolás (titkosítás) és a dekódolás (visszafejtés) is.</td>
+                <td>A nyilvános kulccsal titkosított adatot **csak a hozzá tartozó titkos kulccsal** lehet visszafejteni.</td>
+            </tr>
+            <tr>
+                <td><strong>Sebesség és erőforrás</strong></td>
+                <td>Rendkívül gyors, minimális számítási kapacitást igényel. Nagy adatmennyiségre ideális.</td>
+                <td>Lassabb, bonyolult matematikai műveleteken (pl. prímfelbontás) alapul.</td>
+            </tr>
+            <tr>
+                <td><strong>Kulcscsere problémája</strong></td>
+                <td>Kockázatos: a kulcsot valahogy el kell juttatni a fogadóhoz. Ha lehallgatják a kulcsot, a titok odavan.</td>
+                <td>Biztonságos: a nyilvános kulcsot bárki láthatja, a titkos kulcsot pedig a tulajdonos sosem adja ki a kezéből.</td>
+            </tr>
+            <tr>
+                <td><strong>Tipikus algoritmusok</strong></td>
+                <td>AES (Advanced Encryption Standard), DES, 3DES</td>
+                <td>RSA, ECC (Elliptic Curve Cryptography)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. A hibrid titkosítás lényege (Pl. HTTPS / TLS)</h3>
+    <ul>
+        <li>A gyakorlatban (pl. a weboldalak böngészésekor) a két módszert kombinálják.</li>
+        <li>A kapcsolat kezdetén **aszimmetrikus titkosítással** biztonságosan kicserélnek egy alkalmi, egyszer használatos szimmetrikus kulcsot (Session Key), majd a tényleges adatforgalmat már ezzel a **szimmetrikus kulccsal** kódolják a nagy sebesség érdekében.</li>
+    </ul>
+
+    <h3>4. A digitális aláírás és a Hash függvények</h3>
+    <ul>
+        <li><strong>Hash (Lenyomat) függvény:</strong> Egy tetszőleges méretű adatból (fájl, szöveg) egy fix hosszúságú, egyedi karaktersorozatot (lenyomatot) generál (pl. SHA-256). Egyirányú (a lenyomatból nem állítható vissza az adat) és ütközésmentes (két különböző fájlnak nem lehet azonos a lenyomata).</li>
+        <li><strong>Digitális aláírás működése (Hitelesség és sértetlenség biztosítása):</strong>
+            <ul>
+                <li>Az elküldendő dokumentumból a feladó képez egy **hash lenyomatot**.</li>
+                <li>Ezt a lenyomatot a feladó lezárja (titkosítja) a **saját TITKOS kulcsával** &rarr; ez maga a digitális aláírás.</li>
+                <li>A fogadó a feladó **NYILVÁNOS kulcsával** felnyitja az aláírást, megkapva az eredeti hash-t. Majd ő is kiszámítja a kapott dokumentum hash-ét. Ha a két hash megegyezik, a dokumentum sértetlen, és biztosan a feladótól származik (nem letagadható).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
