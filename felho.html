@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Információs társadalom jelenségei</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Az információs társadalom jelenségei és etikai kérdései</h1>
+
+    <h3>1. E-ügyintézés és az Ügyfélkapu+</h3>
+    <ul>
+        <li><strong>E-ügyintézés fogalma:</strong> A közigazgatási és hatósági eljárások elektronikus csatornákon történő lebonyolítása, amely csökkenti a bürokráciát, papírmentessé és időfüggetlénnyé teszi a hivatalos ügyek intézését.</li>
+        <li><strong>Azonosítási szolgáltatások:</strong> Az elektronikus ügyintézés alapfeltétele a felhasználó hiteles és biztonságos azonosítása. Magyarországon ezt a KAÜ (Központi Azonosítási Ügynök) biztosítja, melynek legfontosabb pillére az **Ügyfélkapu+** (illetve a mobilalkalmazás-alapú *DÁP - Digitális Állampolgárság Program*).</li>
+        <li><strong>Biztonság és működés:</strong> Az Ügyfélkapu+ kétlépcsős azonosítást (felhasználónév, jelszó + mobileszközre érkező egyszer használatos kód) követel meg. Ezen keresztül érhetők el a hivatalos dokumentumok, az adóbevallás (SZJA), az e-Egészségügy (EESZT) és az elektronikus aláírási rendszerek.</li>
+    </ul>
+
+    <h3>2. Felhőalapú szolgáltatások (Cloud Computing)</h3>
+    <ul>
+        <li><strong>Lényege:</strong> Számítástechnikai erőforrások (tárhely, hálózat, szoftverek, szerverek) interneten keresztüli, igény szerinti elérése a helyi hardver helyett a szolgáltató adatközpontjaiból. Három fő szolgáltatási modellt különböztetünk meg:</li>
+    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Modell típus</th>
+                <th>Szakmai leírás / Hatáskör</th>
+                <th>Gyakorlati példa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>IaaS<br>(Infrastructure as a Service)</strong></td>
+                <td>**Infrastruktúra szolgáltatás.** A szolgáltató a tiszta hardvert (virtuális szerverek, hálózat, nyers tárhely) biztosítja. Az operációs rendszert és a szoftvereket a bérlő telepíti és kezeli.</td>
+                <td>Amazon Web Services (AWS) EC2, Microsoft Azure VM, Google Cloud Compute Engine.</td>
+            </tr>
+            <tr>
+                <td><strong>PaaS<br>(Platform as a Service)</strong></td>
+                <td>**Platform szolgáltatás.** A hardveren felül az operációs rendszer, az adatbázis-kezelő és a futtatókörnyezet is készen áll. Fejlesztőknek ideális, mert csak a saját kódjukat kell futtatniuk.</td>
+                <td>Heroku, Google App Engine, AWS Elastic Beanstalk.</td>
+            </tr>
+            <tr>
+                <td><strong>SaaS<br>(Software as a Service)</strong></td>
+                <td>**Szoftver szolgáltatás.** A teljes, kész alkalmazást az interneten (többnyire böngészőből) futtatja a végfelhasználó. A háttér hardverrel és frissítésekkel egyáltalán nem kell törődni.</td>
+                <td>Google Workspace (Docs, Drive), Microsoft 365 Online, Netflix, Spotify.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. A Mesterséges Intelligencia (MI) etikai kérdései</h3>
+    <ul>
+        <li><strong>Dezinformáció és Deepfake:</strong> Generatív modellekkel tökéletesen élethű, de hamis videók, hangfelvételek és cikkek hozhatók létre, amelyek alááshatják a médiába vetett bizalmat és politikai, társadalmi instabilitást okozhatnak.</li>
+        <li><strong>Elfogultság és diszkrimináció (Algorithmic Bias):</strong> Ha az MI-t olyan adatokon tanítják, amelyek emberi előítéleteket tükröznek, az algoritmus átveszi és felerősíti azokat (pl. rasszista vagy szexista döntések HR-szoftvereknél vagy hitelbírálatnál).</li>
+        <li><strong>Szerzői jogok és szellemi tulajdon:</strong> A generatív modellek (pl. LLM-ek, képgenerálók) internetről begyűjtött, szerzői jog által védett művészeti alkotásokon és szövegeken tanulnak a művészek beleegyezése vagy kompenzációja nélkül.</li>
+        <li><strong>Felelősség kérdése (Black Box probléma):</strong> A mély tanulási (Deep Learning) modellek belső logikája annyira komplex, hogy sokszor maguk a fejlesztők sem látják át, miért hozott meg az MI egy döntést. Ha egy önvezető autó balesetet okoz vagy egy orvosi AI tévesen diagnosztizál, jogilag nehezen tisztázható, hogy a fejlesztő, a gyártó vagy az üzemeltető a felelős.</li>
+    </ul>
+
+    <h3>4. A digitális szakadék (Digital Divide)</h3>
+    <ul>
+        <li><strong>Fogalma:</strong> A társadalom különböző csoportjai között kialakuló gazdasági, szociális és kulturális egyenlőtlenség, amely abból fakad, hogy az egyének milyen mértékben férnek hozzá az információs és kommunikációs technológiákhoz (IKT), és milyen szinten képesek azokat használni.</li>
+        <li><strong>Három szintje (Dimenziói):</strong>
+            <ul>
+                <li>**Első szint (Hozzáférés):** Fizikai infrastruktúra hiánya (pl. van-e szélessávú internet, számítógép az adott régióban vagy családban).</li>
+                <li>**Második szint (Használat/Digitális írástudás):** Rendelkezésre áll a hardver, de a felhasználó nem birtokolja a szükséges készségeket (pl. egy idős ember vagy aluliskolázott személy nem tud e-ügyintézést végezni vagy információt hitelesíteni).</li>
+                <li>**Harmadik szint (Eredmény):** Az egyén képes-e a megszerzett digitális tudást a saját életszínvonalának növelésére fordítani (pl. távmunka végzése, online tanulás, jobb álláslehetőségek elérése).</li>
+            </ul>
+        </li>
+        <li><strong>Következményei:</strong> A digitális szakadék növeli a társadalmi elszigeteltséget, rontja a munkaerőpiaci esélyeket és mélyíti a szegénységet, mivel a modern világban a szolgáltatások és a tudás jelentős része kizárólag digitálisan érhető el.</li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
