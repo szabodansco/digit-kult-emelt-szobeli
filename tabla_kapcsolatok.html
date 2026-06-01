@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Adatbázis Kapcsolattípusok</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #f7fafc;
+            padding: 1px 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Adatbázis táblák kapcsolattípusai és az N:M reláció felbontása</h1>
+
+    <h3>1. Miért van szükség kapcsolatokra?</h3>
+    <ul>
+        <li>A relációs adatbázis-modell lényege, hogy a normalizálás során az adatokat különálló, dedikált táblákra daraboljuk fel a redundancia elkerülése érdekében.</li>
+        <li>Ahhoz, hogy az összetartozó információkat újra le tudjuk kérdezni (pl. egy SQL <code>JOIN</code> művelettel), a táblák között logikai és fizikai **kapcsolatokat (relációkat)** kell kiépíteni az **elsődleges kulcsok (PK)** és **idegen kulcsok (FK)** segítségével.</li>
+    </ul>
+
+    <h3>2. A három alapvető kapcsolattípus</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Kapcsolat típus</th>
+                <th>Logikai szabály / Definíció</th>
+                <th>Hogyan valósítjuk meg technikailag?</th>
+                <th>Gyakorlati példa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1:1<br>(Egy-az-egyhez)</strong></td>
+                <td>Az 'A' tábla egy rekordjához a 'B' tábla legfeljebb egy rekordja tartozhat, és fordítva.</td>
+                <td>A 'B' tábla elsődleges kulcsa egyben idegen kulcsként (FK) is funkcionál, és **UNIQUE** kényszer van rajta.</td>
+                <td><code>Szemelyek</code> &harr; <code>Szemelyi_Igalvanyok</code>.<br>(Egy embernek egy igazolványa van, egy igazolvány egy emberé).</td>
+            </tr>
+            <tr>
+                <td><strong>1:N<br>(Egy-a-többhöz)</strong></td>
+                <td>Az 'A' tábla egy rekordjához a 'B' tábla több rekordja is kapcsolódhat, de a 'B' egy rekordjához az 'A'-ból csak egy tartozhat.</td>
+                <td>**A kapcsolatot az N oldalon elhelyezett idegen kulcs (FK) valósítja meg**, ami az 1 oldal elsődleges kulcsára hivatkozik.</td>
+                <td><code>Osztalyok (1)</code> &harr; <code>Diakok (N)</code>.<br>(Egy osztályba több diák jár, de egy diák csak egy osztályba járhat).</td>
+            </tr>
+            <tr>
+                <td><strong>N:M<br>(Több-a-többhöz)</strong></td>
+                <td>Az 'A' tábla egy rekordjához a 'B' tábla több rekordja tartozhat, és a 'B' egy rekordjához is az 'A' több rekordja tartozhat.</td>
+                <td>**Közvetlenül nem megvalósítható.** Egy harmadik, úgynevezett **kapcsolótábla** (Junction Table) beiktatására van szükség.</td>
+                <td><code>Diakok (N)</code> &harr; <code>Tantargyak (M)</code>.<br>(Egy diák több tárgyat tanul, egy tárgyat több diák tanul).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. Az N:M (több-a-többhöz) kapcsolat felbontása</h3>
+    <ul>
+        <li><strong>A probléma:</strong> A relációs adatbázis-kezelők nem képesek közvetlenül lekezelni az N:M kapcsolatot, mert az oszlopok és sorok metszetében (a cellákban) csak atomi, egyetlen érték állhat (1NF). Nem tehetünk egy <code>tantargy_id</code> oszlopba egy diák mellé vesszővel elválasztva több azonosítót.</li>
+        <li><strong>A megoldás (A kapcsolótábla elve):</strong> Az N:M kapcsolatot **felbontjuk két darab 1:N kapcsolatra** egy köztes **kapcsolótábla** (más néven asszociatív tábla) segítségével.</li>
+    </ul>
+
+    <h3>4. Gyakorlati megvalósítás sémája (Példa)</h3>
+    <ul>
+        <li>Szeretnénk követni, hogy melyik diák melyik tantárgyat tanulja. Létrehozunk egy köztes, <code>Tanulja</code> nevű kapcsolótáblát:</li>
+    </ul>
+    
+    <div style="display: flex; gap: 10px; margin-top: 8px;">
+        <div style="flex: 1; border: 1px solid #cbd5e0; padding: 6px; background: #f7fafc;">
+            <strong>1. Diakok (Törzstábla)</strong><br>
+            • <u>diak_id</u> (PK)<br>
+            • nev
+        </div>
+        <div style="font-weight: bold; align-self: center; color: #3182ce;">&larr; 1 : N &rarr;</div>
+        <div style="flex: 1.2; border: 2px solid #3182ce; padding: 6px; background: #ebf8ff;">
+            <strong>2. Tanulja (Kapcsolótábla)</strong><br>
+            • <u><i>diak_id</i></u> (PK, FK1 &rarr; Diakok)<br>
+            • <u><i>tantargy_id</i></u> (PK, FK2 &rarr; Tantargyak)
+        </div>
+        <div style="font-weight: bold; align-self: center; color: #3182ce;">&larr; N : 1 &rarr;</div>
+        <div style="flex: 1; border: 1px solid #cbd5e0; padding: 6px; background: #f7fafc;">
+            <strong>3. Tantargyak (Törzstábla)</strong><br>
+            • <u>tantargy_id</u> (PK)<br>
+            • tantargy_neve
+        </div>
+    </div>
+
+    <h3>5. A kapcsolótábla technikai jellemzői (Vizsgakövetelmény)</h3>
+    <ul>
+        <li><strong>Összetett elsődleges kulcs:</strong> A kapcsolótábla elsődleges kulcsa (PK) a két kapcsolódó törzstábla elsődleges kulcsainak **párosából** (kombinációjából) áll össze. Ez az összetett kulcs garantálja, hogy egy diákot egy tantárgyhoz ne lehessen kétszer hozzárendelni (egyediség).</li>
+        <li><strong>Két külön idegen kulcs:</strong> A kapcsolótábla mindkét oszlopa külön-külön idegen kulcsként (**Foreign Key**) hivatkozik a saját törzstáblájára, biztosítva a referenciális integritást.</li>
+        <li><strong>Plusz attribútumok (Attribútummal rendelkező kapcsolat):</strong> A kapcsolótábla nemcsak a kapcsolat meglétét tárolhatja, hanem a kapcsolathoz szorosan kötődő egyéb adatokat is. Például a <code>Tanulja</code> táblát kibővíthetjük egy <code>evvegi_jegy</code> vagy <code>hianyzott_orak</code> oszloppal, hiszen a jegy vagy a hiányzás sem a diákhoz egyedül, sem a tantárgyhoz egyedül nem tartozhat, csak a kettő kapcsolatához.</li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
