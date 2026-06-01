@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Kódolási szabványok</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #f7fafc;
+            padding: 1px 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Kódolási szabványok szükségessége és működése</h1>
+
+    <h3>1. Alapfogalmak és a kódolás szükségessége</h3>
+    <ul>
+        <li><strong>A probléma:</strong> A számítógép kizárólag kettes számrendszerbeli számokat (bájtokat) képes tárolni és feldolgozni. Ahhoz, hogy szöveget jelenítsünk meg, szükség van egy egyértelmű **kódtáblára**, amely minden egyes karakterhez (betűhöz, számhoz, írásjelhez) hozzárendel egy egyedi számot.</li>
+        <li><strong>Karakterkódolás:</strong> Az a szabályrendszer (leképezés), amely meghatározza a karakterek és a bináris számértékek közötti megfeleltetést.</li>
+    </ul>
+
+    <h3>2. Főbb kódolási szabványok összehasonlítása</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Szabvány</th>
+                <th>Kódhossz (Karakterenként)</th>
+                <th>Karakterek száma</th>
+                <th>Előnyök, hátrányok és jellemzők</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>ASCII</strong></td>
+                <td>7 bit (tárolásban 1 bájt)</td>
+                <td>128 ($2^7$)</td>
+                <td>Rendkívül kis méret. Csak az angol ábécé betűit, számokat és vezérlőkaraktereket tartalmazza. **Nincsenek benne ékezetes betűk.**</td>
+            </tr>
+            <tr>
+                <td><strong>Kiterjesztett ASCII</strong></td>
+                <td>8 bit (1 bájt)</td>
+                <td>256 ($2^8$)</td>
+                <td>A felső 128 helyre regionális karaktereket tettek (pl. ISO-8859-2 a kelet-európai ékezeteknek). Hátránya: ha rossz kódlappal nyitották meg, a szöveg olvashatatlan "halandzsává" (kr擴adattá) vált.</td>
+            </tr>
+            <tr>
+                <td><strong>UTF-8</strong></td>
+                <td>**Változó:** 1 - 4 bájt</td>
+                <td>Több mint 1,1 millió</td>
+                <td>A mai internet domináns kódolása. **Visszafelé kompatibilis az ASCII-val** (az angol szöveg 1 bájton tárolódik). Hatékony helykihasználás, univerzális.</td>
+            </tr>
+            <tr>
+                <td><strong>UTF-16</strong></td>
+                <td>**Változó:** 2 vagy 4 bájt</td>
+                <td>Több mint 1,1 millió</td>
+                <td>A leggyakoribb karaktereket fixen 2 bájton tárolja. A Windows belső rendszere és a Java is ezt használja. Hátránya: a tiszta angol szövegek méretét feleslegesen megduplázza az UTF-8-hoz képest.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. Az Unicode és az UTF közötti különbség</h3>
+    <ul>
+        <li><strong>Unicode (A szabvány):</strong> Egy univerzális, globális karakterkészlet-szabvány, amelynek célja, hogy a világ összes létező írásrendszerét (latin, cirill, arab, kínai, emojik, stb.) egyetlen közös rendszerbe foglalja. Az Unicode minden karakterhez egy egyedi **kódpontot** (Code Point, jelölése pl. <code>U+0041</code> az 'A' betűhöz) rendel.</li>
+        <li><strong>UTF (A megvalósítás):</strong> Az *Unicode Transformation Format* rövidítése. Az Unicode csak azt mondja meg, melyik betűhöz melyik szám tartozik, az **UTF szabványok (UTF-8, UTF-16)** pedig azt határozzák meg, hogy ezek a számok *fizikailag hogyan, hány bájton íródnak be* a memóriába vagy a fájlba.</li>
+    </ul>
+
+    <h3>4. Az UTF-8 zsenialitása (A bájtszerkezet működése)</h3>
+    <ul>
+        <li>Az UTF-8 egy változó hosszúságú kódolás. A processzor a beolvasott bájt **első bitjeiből** azonnal tudja, hogy az adott karakter hány bájtból áll:
+            <ul>
+                <li><strong>1 bájtos karakter (ASCII kompatibilis):</strong> A bájt <code>0</code>-val kezdődik. Forma: <code>0xxxxxxx</code> (Pl. angol betűk).</li>
+                <li><strong>2 bájtos karakter:</strong> Az első bájt <code>110</code>-val kezdődik, a követő bájt pedig <code>10</code>-val. Forma: <code>110xxxxx 10xxxxxx</code> (Pl. a magyar ékezetes betűk, mint az 'á', 'é').</li>
+                <li><strong>3 bájtos karakter:</strong> Az első bájt <code>1110</code>-val kezdődik, a következők <code>10</code>-val. Forma: <code>1110xxxx 10xxxxxx 10xxxxxx</code> (Pl. ázsiai írásjelek).</li>
+                <li><strong>4 bájtos karakter:</strong> Az első bájt <code>11110</code>-val kezdődik, a következők <code>10</code>-val. Forma: <code>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code> (Pl. ritka szimbólumok, összetett emojik).</li>
+            </ul>
+        </li>
+        <li><strong>Önszinkronizáció:</strong> Ha az adatátvitel során megsérül egy bájt, a szoftver a <code>10xxxxxx</code> mintából azonnal felismeri, hogy az egy karakter közepén álló "folytatás-bájt", így átugorja, és a következő tiszta karaktertől hibátlanul folytatja a beolvasást anélkül, hogy a teljes dokumentum szétesne.</li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
