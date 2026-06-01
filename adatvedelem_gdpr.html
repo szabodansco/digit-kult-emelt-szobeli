@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Adatvédelem és GDPR</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Adatvédelem, GDPR és a digitális profilalkotás</h1>
+
+    <h3>1. Mi az a GDPR és kik a szereplői?</h3>
+    <ul>
+        <li><strong>GDPR (General Data Protection Regulation):</strong> Az Európai Unió Általános Adatvédelmi Rendelete. Egy egységes, kötelező érvényű jogszabály, amely a magánszemélyek személyes adatainak védelmét és az adatok szabad áramlását szabályozza.</li>
+        <li><strong>Főbb szereplők (Szakkifejezések):</strong>
+            <ul>
+                <li>**Érintett (Data Subject):** Az a természetes személy, aki azonosított vagy az IP-cím, helyadatok alapján azonosítható (maga a felhasználó).</li>
+                <li>**Adatkezelő (Data Controller):** Az a szervezet vagy cég, amely meghatározza a személyes adatok kezelésének céljait és eszközeit (pl. a közösségi oldal, a webáruház, az iskola).</li>
+                <li>**Adatfeldolgozó (Data Processor):** Az a külső partner, aki az adatkezelő nevében és utasítására végzi a technikai műveleteket (pl. egy külső szerverhosztoló vagy bérszámfejtő cég).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>2. A személyes adatok kezelésének alapelvei</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Alapelv neve</th>
+                <th>Mit követel meg a jogszabály az adatkezelőtől?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Jogszerűség és átláthatóság</strong></td>
+                <td>Az adatok gyűjtésének tiszta, jogszerű jogalapon kell nyugodnia (pl. a felhasználó kifejezett, önkéntes hozzájárulása). A felhasználót érthetően tájékoztatni kell (Adatkezelési nyilatkozat).</td>
+            </tr>
+            <tr>
+                <td><strong>Célhoz kötöttség</strong></td>
+                <td>Személyes adatot csak pontosan meghatározott, egyértelmű és törvényes célból szabad gyűjteni. Tilos az adatokat később ettől eltérő célra felhasználni.</td>
+            </tr>
+            <tr>
+                <td><strong>Adattakarékosság</strong></td>
+                <td>Csak olyan és annyi adatot szabad bekérni, ami a cél eléréséhez elengedhetetlenül szükséges (pl. egy hírlevél feliratkozáshoz tilos elkérni a születési helyet vagy a lakcímet).</td>
+            </tr>
+            <tr>
+                <td><strong>Korlátozott tárolhatóság</strong></td>
+                <td>Az adatokat csak addig a minimális ideig szabad tárolni, amíg az adatkezelési cél megköveteli, vagy amíg a törvény előírja. Utána véglegesen törölni vagy anonimizálni kell őket.</td>
+            </tr>
+            <tr>
+                <td><strong>Integritás és bizalmas jelleg</strong></td>
+                <td>Megfelelő technikai és szervezési intézkedésekkel (pl. titkosítás, tűzfalak) garantálni kell az adatok biztonságát a jogosulatlan hozzáféréssel, megváltoztatással vagy adatvédelmi incidensekkel (szivárgásokkal) szemben.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. Az érintett alapjogai és a felejtéshez való jog (Right to be Forgotten)</h3>
+    <ul>
+        <li>A felhasználónak joga van hozzáférni a róla tárolt adatokhoz, kérheti azok helyesbítését vagy az adatkezelés korlátozását.</li>
+        <li><strong>A törléshez való jog (Felejtéshez való jog):</strong> Az érintett kérésére az adatkezelő köteles indokolatlan késedelem nélkül törölni a rá vonatkozó személyes adatokat, ha:
+            <ul>
+                <li>Az adatokra már nincs szükség abból a célból, amiért gyűjtötték.</li>
+                <li>A felhasználó visszavonja a hozzájárulását, és az adatkezelésnek nincs más jogalapja.</li>
+                <li>A felhasználó tiltakozik a közvetlen üzletszerzési (marketing) célú adatkezelés ellen.</li>
+                <li>**Webes kiterjesztés:** Ha az adatkezelő nyilvánosságra hozta az adatot (pl. Google kereső), a törlési kérelem esetén köteles értesíteni a többi adatkezelőt is (pl. más weboldalakat), hogy töröljék az adott adatra mutató linkeket vagy másolatokat.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>4. A profilalkotás (Profiling) lényege és veszélyei</h3>
+    <ul>
+        <li><strong>Definíció:</strong> Személyes adatok automatizált kezelésének bármely olyan formája, amelynek során a felhasználó személyes jellemzőit (online viselkedés, vásárlási szokások, tartózkodási hely, érdeklődési kör, gazdasági helyzet) értékelik ki, elemzik vagy jósolják meg. Az adatgyűjtés leggyakrabban böngésző sütik (**cookies**) és követőkódok segítségével történik.</li>
+        <li><strong>A profilalkotás főbb veszélyei:</strong>
+            <ul>
+                <li>**Visszaélések és manipuláció:** Az algoritmusok kiismerik a felhasználó gyengeségeit vagy politikai nézeteit, és célzott dezinformációval, álhírekkel vagy manipulatív hirdetésekkel képesek befolyásolni a döntéseit (pl. választások során).</li>
+                <li>**Visszhangkamra (Echo Chamber) effektus:** A közösségi oldalak csak olyan tartalmakat mutatnak a felhasználónak, amelyek egyeznek a profilja alapján becsült véleményével. Ez radikalizálódáshoz vezet és beszűkíti a világlátást.</li>
+                <li>**Árdiszkrimináció:** A profil alapján a webáruházak dinamikus árazást alkalmazhatnak: ha a rendszer azt jósolja, hogy a felhasználó tehetős vagy sürgősen szüksége van egy repülőjegyre, magasabb árat jelenít meg neki.</li>
+                <li>**Automatizált döntéshozatal hátrányai:** Ha a profil alapján egy gép (AI) dönt el emberi felülbírálat nélkül egy hitelkérelmet vagy egy állásjelentkezést, az rejtett diszkriminációhoz és igazságtalansághoz vezethet. (A GDPR biztosítja a jogot, hogy az ember kérhesse a döntés emberi felülvizsgálatát).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
