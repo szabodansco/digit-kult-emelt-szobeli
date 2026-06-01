@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Adatbázisok Normalizálása</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #f7fafc;
+            padding: 1px 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Adatbázisok normalizálása: 1NF, 2NF és 3NF alapelvei</h1>
+
+    <h3>1. Miért bontunk szét táblákat? (A normalizálás célja)</h3>
+    <ul>
+        <li><strong>A probléma (Redundancia):</strong> Ha minden adatot egyetlen óriási táblában tárolunk, az adatok feleslegesen ismétlődni fognak. Ez növeli a tárhelyigényt, de a nagyobb bajt a **módosítási anomáliák (működési hibák)** jelentik.</li>
+        <li><strong>A három fő adatbázis-anomália, amit a szétbontással elkerülünk:</strong>
+            <ul>
+                <li>**Beszúrási (Insertion) anomália:** Nem tudunk új adatot rögzíteni anélkül, hogy egy másik, még nem létező adathoz ne kötnénk. (Pl. Nem tudunk felvenni egy új tantárgyat a rendszerbe, amíg nincs hozzá beiratkozott diák).</li>
+                <li>**Módosítási (Update) anomália:** Ha egy adat (pl. egy tanár telefonszáma) megváltozik, azt a táblában mind az 50 helyen át kell írni, ahol szerepel. Ha egy helyen kimarad, az adatbázis ellentmondásossá válik.</li>
+                <li>**Törlési (Deletion) anomália:** Egy adat törlésével akaratlanul más fontos információkat is végleg kitörlünk a rendszerből. (Pl. Ha töröljük az utolsó diákot, aki egy adott tantárgyat tanult, magának a tantárgynak a neve és leírása is eltűnik az adatbázisból).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>2. A három klasszikus normálforma elve és gyakorlata</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Normálforma</th>
+                <th>Szigorú elméleti szabály</th>
+                <th>Mit jelent ez a gyakorlatban? (Hogyan javítjuk?)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1NF<br>(Első normálforma)</strong></td>
+                <td>Minden attribútum (mező) értéke **atomi** (tovább nem bontható), és nincsenek ismétlődő oszlopcsoportok vagy többértékű mezők.</td>
+                <td>Egy cellában nem szerepelhet felsorolás (pl. egy cellába írt több telefonszám, vagy vesszővel elválasztott tantárgyak). **Megoldás:** Új sorokba szervezzük az adatokat, vagy külön kapcsolt táblát hozunk létre.</td>
+            </tr>
+            <tr>
+                <td><strong>2NF<br>(Második normálforma)</strong></td>
+                <td>A tábla teljesíti az 1NF feltételeit, és **minden nemkulcs mező funkcionálisan a teljes elsődleges kulcstól függ** (nincs részleges függőség).</td>
+                <td>Csak **összetett kulcsoknál** releváns. Egy mező nem függhet a kulcsnak csupán az egyik felétől. (Pl. egy <i>Diák_ID + Tantárgy_ID</i> összetett kulcsú táblában a <i>Diák_Neve</i> hibás, mert csak a Diák_ID-tól függ). **Megoldás:** A részlegesen függő adatot új táblába tesszük.</td>
+            </tr>
+            <tr>
+                <td><strong>3NF<br>(Harmadik normálforma)</strong></td>
+                <td>A tábla teljesíti a 2NF feltételeit, és **egyetlen nemkulcs mező sem függ tranzitívan az elsődleges kulcstól**.</td>
+                <td>Egy nemkulcs mező nem függhet egy másik nemkulcs mezőtől. Minden tulajdonságnak közvetlenül a kulcstól kell függnie. (Pl. a <i>Város</i> a <i>Irányítószámhoz</i> tartozik, nem a konkrét személy ID-jához). **Megoldás:** A közvetett függést külön szótártáblába emeljük ki.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. Gyakorlati példa a szétbontás menetére (1NF &rarr; 2NF &rarr; 3NF)</h3>
+    <ul>
+        <li><strong>Kiindulási állapot (Rossz struktúra):</strong> Van egy darab hatalmas táblánk: <code>[Diak_ID, Tantargy_ID, Diak_Neve, Tantargy_Neve, Jegy, Iskola_Nev, Iskola_Cim]</code>. Az elsődleges kulcs összetett: <code>(Diak_ID, Tantargy_ID)</code>, mert egy diák több jegyet kaphat több tárgyból.
+            <ul>
+                <li><strong>2NF-re hozás (Részleges függőségek megszüntetése):</strong>
+                    <br>&bull; A <code>Diak_Neve</code>, <code>Iskola_Nev</code> és <code>Iskola_Cim</code> valójában csak a <i>Diak_ID</i>-tól függ (nem érdekli őket a tantárgy).
+                    <br>&bull; A <code>Tantargy_Neve</code> valójában csak a <i>Tantargy_ID</i>-tól függ (nem érdekli, melyik diák tanulja).
+                    <br>&bull; Egyedül a <code>Jegy</code> az, ami szigorúan a diák és a tantárgy párosától *együtt* függ.
+                    <br><strong>Eredmény (Szétbontás 3 táblára):</strong>
+                    <br>1. <code>Diakok</code> tábla: [<u>Diak_ID</u>, Diak_Neve, Iskola_Nev, Iskola_Cim]
+                    <br>2. <code>Tantargyak</code> tábla: [<u>Tantargy_ID</u>, Tantargy_Neve]
+                    <br>3. <code>Jegyek</code> tábla: [<u>Diak_ID, Tantargy_ID</u>, Jegy] &larr; tiszta 2NF-es kapcsolótábla.
+                </li>
+                <li><strong>3NF-re hozás (Tranzitív függőségek megszüntetése):</strong>
+                    <br>&bull; Nézzük meg a friss <code>Diakok</code> táblát: Az <i>Iskola_Cim</i> nem a diákhoz tartozik közvetlenül, hanem az <i>Iskola_Nev</i>-hez (ha az iskola elköltözik, minden oda járó diáknál át kellene írni a címet &rarr; módosítási anomália). A nemkulcs mező (cím) egy másik nemkulcs mezőtől (név) függ.
+                    <br><strong>Eredmény (Végső szétbontás 3NF-re):</strong>
+                    <br>1. <code>Iskolak</code> tábla: [<u>Iskola_ID</u>, Iskola_Nev, Iskola_Cim]
+                    <br>2. <code>Diakok</code> tábla: [<u>Diak_ID</u>, Diak_Neve, <i>Iskola_ID</i>] &larr; az Iskola_ID idegen kulcs lett (FK).
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>4. Összegzés a vizsgáztató számára</h3>
+    <ul>
+        <li>A normalizálás során a **redundancia minimalizálására** és az **anomáliák kiküszöbölésére** törekszünk.</li>
+        <li>A folyamat lényege: egy nagy, átláthatatlan és hibalehetőségeket rejtő táblát több kisebb, logikailag tiszta és **idegen kulcsokkal (Foreign Key) összekapcsolt** táblára darabolunk fel.</li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
