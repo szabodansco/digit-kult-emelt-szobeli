@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Alapvető algoritmus-szerkezetek</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #f7fafc;
+            padding: 1px 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Alapvető algoritmus-szerkezetek</h1>
+
+    <h3>1. Az algoritmus fogalma és a Böhm-Jacopini tétel</h3>
+    <ul>
+        <li><strong>Algoritmus:</strong> Egy feladat megoldása érdekében végrehajtandó lépések (utasítások) véges, egyértelműen meghatározott és végrehajtható sorozata.</li>
+        <li><strong>Böhm-Jacopini tétel (Strukturált programozás alapelve):</strong> Kimondja, hogy bármely tetszőlegesen összetett algoritmus (program) leírható és megvalósítható mindössze három alapvető vezérlési szerkezet kombinációjával: **szekvencia**, **szelekció (elágazás)** és **iteráció (ciklus)**. Ezzel a tétel megszüntette a kaotikus ugró utasítások (pl. <code>GOTO</code>) szükségességét.</li>
+    </ul>
+
+    <h3>2. Szekvencia és Szelekció (Elágazás)</h3>
+    <ul>
+        <li><strong>Szekvencia (Soros végrehajtás):</strong> A legegyszerűbb struktúra. Az utasítások a leírás sorrendjében, egymás után, időben elkülönítve, pontosan egyszer hajtódnak végre.</li>
+        <li><strong>Szelekció (Elágazás):</strong> Egy logikai feltétel (feltétel kifejezés) igaz vagy hamis értéke alapján határozza meg a program futásának további irányát. Típusai:
+            <ul>
+                <li>**Egyágú elágazás:** Ha a feltétel igaz, végrehajtja a kijelölt utasítást, ha hamis, átugorja (<code>if</code>).</li>
+                <li>**Kétágú elágazás:** Ha a feltétel igaz, az IGAZ ág (<code>if</code>), ha hamis, a HAMIS ág (<code>else</code>) utasításai futnak le. A két ág egymást kölcsönösen kizárja.</li>
+                <li>**Többágú (Sokágú) elágazás:** Egymásba ágyazott elágazások (<code>if-elif-else</code>) vagy diszkrét értékek alapján történő választás (<code>switch-case</code>).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>3. Iteráció (Ciklusok) összehasonlítása</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Ciklus típus</th>
+                <th>Működési elv és jellemzők</th>
+                <th>Minimális futásszám</th>
+                <th>Mikor ezt használjuk? (Példa)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Elöltesztelő ciklus<br>(While)</strong></td>
+                <td>A ciklusmag végrehajtása előtt ellenőrzi a feltételt. **Addig fut, amíg a feltétel IGAZ.**</td>
+                <td>**0** (Ha a feltétel már az elején hamis, a ciklusmag egyszer sem fut le).</td>
+                <td>Ha nem tudjuk előre a lépésszámot, és lehet, hogy el sem kell indítani. (Pl. Fájl olvasása a végéig).</td>
+            </tr>
+            <tr>
+                <td><strong>Hátultesztelő ciklus<br>(Do-While / Repeat)</strong></td>
+                <td>A ciklusmag lefutása után ellenőrzi a feltételt. **Addig ismétel, amíg a feltétel hamissá nem válik (vagy igaz nem lesz – nyelvtől függően).**</td>
+                <td>**1** (A ciklusmag a feltételtől függetlenül az elején legalább egyszer mindenképpen lefut).</td>
+                <td>Garantáltan legalább egyszer le kell futnia. (Pl. Felhasználói adatbevitel ellenőrzése / menükezelés).</td>
+            </tr>
+            <tr>
+                <td><strong>Számlálós ciklus<br>(For)</strong></td>
+                <td>Egy ciklusváltozó (számláló) lépked egy zárt tartomány kezdő- és végértéke között, egy meghatározott lépésközzel.</td>
+                <td>**0 vagy több** (A tartomány határaitól függ).</td>
+                <td>**Ha pontosan tudjuk a lépések számát** a ciklus indulásakor. (Pl. Egy 10 elemű tömb elemeinek feldolgozása, vagy 1-től 100-ig a számok összeadása).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>4. Kritikus ciklusfogalmak emelt szinten</h3>
+    <ul>
+        <li><strong>Végtelen ciklus:</strong> Olyan logikai hiba, amikor a ciklus feltétele soha nem válik hamissá, így a program beragad és végtelen ideig ismétel. Elöltesztelő ciklusnál kötelező, hogy a ciklusmagon belül változzon a feltételben szereplő változó értéke.</li>
+        <li><strong>Ciklusmag:</strong> Azon utasítások összessége, amelyeket a ciklus ismételten végrehajt.</li>
+        <li><strong>Vezérlésmódosító utasítások (Vizsgázói pluszpont):</strong>
+            <ul>
+                <li><code>break</code>: Azonnal megszakítja a ciklus futását, és a vezérlés a ciklus utáni első utasításra ugrik.</li>
+                <li><code>continue</code>: Átugorja a ciklusmag aktuális lépésének hátralévő részét, és azonnal a következő iterációra (feltétel-ellenőrzésre vagy léptetésre) ugrik.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
