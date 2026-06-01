@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Szerzői jogok és licencek</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #f7fafc;
+            padding: 1px 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Szerzői jogok, licencek és forráskód-modellek</h1>
+
+    <h3>1. Copyright vs. Copyleft szellemiség</h3>
+    <ul>
+        <li><strong>Copyright (Minden jog fenntartva):</strong> A hagyományos szerzői jogi modell. A szellemi alkotás létrejöttének pillanatától automatikusan védi a szerzőt. Senki nem másolhatja, terjesztheti vagy módosíthatja a művet a szerző kifejezett, előzetes engedélye nélkül.</li>
+        <li><strong>Copyleft (Egyes jogok fenntartva):</strong> A hagyományos jogrendszerre épülő, de azzal ellentétes célú megközelítés. A szerző törvényes jogot biztosít bárkinek a mű ingyenes felhasználására, terjesztésére és módosítására, de azzal a szigorú feltétellel, hogy **a módosított, továbbfejlesztett változatot is pontosan ugyanezekkel a szabad feltételekkel kötelező közzétenni** (öröklődő szabadság, pl. GNU GPL licenc).</li>
+    </ul>
+
+    <h3>2. A Creative Commons (CC) licencek rendszere</h3>
+    <ul>
+        <li>A Creative Commons egy nonprofit szervezet által létrehozott ingyenes licenckészlet, amellyel a digitális tartalomgyártók (képek, zenék, szövegek alkotói) pontosan szabályozhatják, hogy a nyilvánosság mit tehet meg a művükkel. A licencek 4 alapvető feltétel kombinációjából épülnek fel:</li>
+    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Feltétel ikon/név</th>
+                <th>Rövidítés</th>
+                <th>Szakmai jelentése és kötelezettsége</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Nevezd meg! (Attribution)</strong></td>
+                <td>**BY**</td>
+                <td>A művet szabadon lehet másolni, terjeszteni és módosítani, de a szerző nevét és az eredeti forrást kötelező feltüntetni. **Ez minden modern CC licenc alapkövetelménye.**</td>
+            </tr>
+            <tr>
+                <td><strong>Ne add el! (Non-Commercial)</strong></td>
+                <td>**NC**</td>
+                <td>A mű és annak származékai szabadon használhatók, de **kereskedelmi (pénzszerzési) célra nem használhatók fel** a szerző külön engedélye nélkül.</td>
+            </tr>
+            <tr>
+                <td><strong>Így add tovább! (Share-Alike)</strong></td>
+                <td>**SA**</td>
+                <td>A mű módosítható és továbbfejleszthető, de a belőle készült új alkotást **kizárólag az eredetivel megegyező licenc alatt** szabad közzétenni (Ez a Copyleft elv CC megvalósítása).</td>
+            </tr>
+            <tr>
+                <td><strong>Ne változtasd! (No-Derivatives)</strong></td>
+                <td>**ND**</td>
+                <td>A művet szabadon le lehet tölteni és terjeszteni, de **szigorúan tilos átalakítani, átdolgozni vagy abból származékos művet készíteni** (csak az eredeti formájában használható).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. Nyílt forráskód (Open Source) vs. Zárt forráskód (Proprietary)</h3>
+    <ul>
+        <li><strong>Nyílt forráskódú szoftverek (Open Source):</strong> 
+            <ul>
+                <li>A program ember által olvasható **forráskódja nyilvános**, bárki szabadon letöltheti, átnézheti, módosíthatja és újrafordíthatja.</li>
+                <li>**Előnyei:** Közösségi fejlesztés (gyors hibajavítások), átláthatóság (nincsenek rejtett adatgyűjtő vagy kártékony kódok), nincs licencdíj (többnyire ingyenes).</li>
+                <li>**Példák:** Linux kernel, VLC Media Player, Mozilla Firefox, Python nyelv, WordPress.</li>
+            </ul>
+        </li>
+        <li><strong>Zárt forráskódú szoftverek (Proprietary / Tulajdonosi szoftver):</strong> 
+            <ul>
+                <li>A forráskódot a fejlesztő cég üzleti titokként kezeli és elzárja. A felhasználó kizárólag a már lefordított, gép által végrehajtható bináris állományt (pl. <code>.exe</code>) kapja meg a szoftver megvásárlásakor.</li>
+                <li>**Előnyei:** Dedikált szakszerű terméktámogatás, garantált kompatibilitás és elszámoltathatóság, egységes, professzionális UX/UI tervezés.</li>
+                <li>**Példák:** Microsoft Windows, Adobe Photoshop, Microsoft Office, macOS.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>4. Ingyenes szoftverkategóriák precíz elkülönítése</h3>
+    <ul>
+        <li><strong>Freeware:</strong> Zárt forráskódú, de a fejlesztő engedélyével **ingyenesen használható** program (pl. Adobe Acrobat Reader). Kereskedelmi célú használata gyakran korlátozott.</li>
+        <li><strong>Shareware / Demó:</strong> Ingyenesen letölthető, de korlátozott funkcionalitású szoftver. Általában egy bizonyos próbaidő (pl. 30 nap) után, vagy bizonyos funkciók feloldásához meg kell vásárolni a licencet (pl. WinRAR).</li>
+        <li><strong>Public Domain:</strong> Olyan köztulajdonban álló mű vagy szoftver, amelyre **semmilyen szerzői jog nem vonatkozik** (mert a szerző lemondott róluk, vagy a védelmi idő lejárt). Bárki korlátozás nélkül, bármire használhatja.</li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
