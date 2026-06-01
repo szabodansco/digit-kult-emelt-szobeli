@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Tömörítési eljárások és multimédia</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #f7fafc;
+            padding: 1px 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Veszteséges és veszteségmentes tömörítés, multimédia elmélet</h1>
+
+    <h3>1. Veszteséges vs. Veszteségmentes tömörítés</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Szempont</th>
+                <th>Veszteségmentes (Lossless) tömörítés</th>
+                <th>Veszteséges (Lossy) tömörítés</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Működési elv</strong></td>
+                <td>Ismétlődések, redundanciák matematikai kódolása (pl. RLE, Huffman-kódolás).</td>
+                <td>Az emberi érzékszervek számára észrevehetetlen vagy lényegtelen adatok végleges eltávolítása.</td>
+            </tr>
+            <tr>
+                <td><strong>Adatmegőrzés</strong></td>
+                <td>**100% tökéletes.** Kicsomagolás után az adat bitre pontosan megegyezik az eredetivel.</td>
+                <td>**Irreverzibilis adatvesztés.** Az eldobott információk soha többé nem állíthatók vissza.</td>
+            </tr>
+            <tr>
+                <td><strong>Tömörítési arány</strong></td>
+                <td>Alacsonyabb (általában 2:1 vagy 3:1 arány érhető el).</td>
+                <td>Rendkívül magas (akár 10:1, 50:1 vagy nagyobb arány is elérhető).</td>
+            </tr>
+            <tr>
+                <td><strong>Tipikus példák</strong></td>
+                <td>Szövegek, futtatható fájlok, adatbázisok (ZIP, RAR), hang (FLAC), kép (PNG).</td>
+                <td>Multimédia: digitális fotók (JPG), audio (MP3), videófolyamok (h.264, MP4).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>2. A mintavételezési törvény (Nyquist-Shannon teoréma)</h3>
+    <ul>
+        <li><strong>A digitalizálás lényege:</strong> A fizikai világ analóg (folytonos) jeleit (pl. hanghullám) a számítógép számára mintavételezéssel (időbeli szeletelés) és kvantálással (értékek számokká alakítása) tesszük digitálissá (diszkrétté).</li>
+        <li><strong>A törvény kimondása:</strong> Egy folytonos, korlátozott sávszélességű analóg jel tökéletesen és torzításmentesen visszaállítható a mintáiból, ha a mintavételi frekvencia ($f_m$) **szigorúan nagyobb, mint a jelben előforduló legmagasabb frekvenciájú komponens ($f_{max}$) kétszerese**: **$f_m > 2 \cdot f_{max}$**.</li>
+        <li><strong>Gyakorlati alkalmazás (Audio CD):</strong> Az emberi fül hallásbájának felső határa kb. 20 kHz. A Nyquist-Shannon törvény alapján ezt legalább 40 kHz-es frekvenciával kell mintavételezni. Ezért lett az ipari szabvány (pl. Audio CD esetén) a **44,1 kHz**, ami garantálja a tökéletes hangvisszaadást. Ha a törvényt megsértik, *aliasing* (visszahajlási) torzulás lép fel.</li>
+    </ul>
+
+    <h3>3. Hogyan működik a hangtömörítés? (Pl. MP3)</h3>
+    <ul>
+        <li>Az MP3 (MPEG-1 Audio Layer III) egy **veszteséges** tömörítési eljárás, amely **pszichoakusztikai modelleken** alapul.</li>
+        <li><strong>Eldobott információk:</strong>
+            <ul>
+                <li>Eltávolítja a 20 Hz alatti és 20 kHz feletti tartományokat (amit az ember nem hall).</li>
+                <li>**Frekvenciamaszkolás (Eltakarás):** Ha egy adott frekvencián egy nagyon hangos hang szól, a mellette lévő közvetlen, halkabb frekvenciájú hangokat az emberi agy nem érzékeli – az MP3 ezeket kiszűri és letörli.</li>
+                <li>**Időbeli maszkolás:** Egy hirtelen, erős hanghatás (pl. dobütés) előtt és után ezredmásodpercekig az emberi fül "süket" a halkabb hangokra, így ezeket az adatokat is felesleges tárolni.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>4. Hogyan működik a videotömörítés? (h.264 és MP4)</h3>
+    <ul>
+        <li><strong>MP4 vs. h.264 tisztázása (Vizsgázói pontosság):</strong> Az **MP4 egy konténerfájl** (mint egy doboz), ami magát a video- és audiosávokat, feliratokat, metaadatokat tartja egyben. A **h.264 (AVC) egy videótömörítési szabvány (kodek)**, ami a dobozon belüli videó képi információit kódolja és sűríti össze.</li>
+        <li><strong>A h.264 veszteséges tömörítési mechanizmusa:</strong> Egy videó valójában másodpercenként 24-60 darab egymást követő állókép (képkocka). Ha mindet teljes pixelgrafikaként tárolnánk, a fájlméret kezelhetetlen lenne. A h.264 két fő redundanciát használ ki:
+            <ul>
+                <li><strong>Térbeli (Spatial) tömörítés:</strong> Az egyetlen képkockán belüli azonos felületeket (pl. kék égbolt) a JPG-hez hasonlóan matematikai blokkokként kódolja, nem pixelről pixelre.</li>
+                <li><strong>Időbeli (Temporal) tömörítés és mozgásbecslés:</strong> A videó egymást követő képkockái között minimális a különbség (pl. egy beszélő ember mögött a háttér teljesen mozdulatlan). A h.264 nem menti le újra a teljes képet, csak a képkockák közötti **változásokat (különbségeket) és a mozgásvektorokat** tárolja el.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
