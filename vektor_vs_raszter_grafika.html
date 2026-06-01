@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Vektorgrafika vs. Rasztergrafika</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #f7fafc;
+            padding: 1px 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Vektorgrafika és rasztergrafika összehasonlítása</h1>
+
+    <h3>1. Működési elvek</h3>
+    <ul>
+        <li><strong>Rasztergrafika (Pixelgrafika):</strong> A kép egy képpontokból (pixelekből) álló kétdimenziós rács (mátrix). Minden egyes pixelhez fix koordináta és színérték (pl. RGB) tartozik. Minél sűrűbb a rács, annál nagyobb a kép felbontása.</li>
+        <li><strong>Vektorgrafika:</strong> A képet nem pontok, hanem geometriai primitívek (pontok, egyenesek, görbék, sokszögek) matematikai leírásai építik fel. A fájl nem a színeket tárolja pontról pontra, hanem a képleteket (pl. egy kör középpontját, sugarát, kerületszínét és kitöltését).</li>
+    </ul>
+
+    <h3>2. Vizuális és technikai összehasonlítás</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Szempont</th>
+                <th>Rasztergrafika (Pixelgrafika)</th>
+                <th>Vektorgrafika</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Skálázhatóság</strong></td>
+                <td>**Korlátozott.** Nagyításkor a pixelek láthatóvá válnak, a kép "kockásodik" (pixelizáció), a szélek életlenné válnak.</td>
+                <td>**Végtelen.** Bármilyen mértékben nagyítható vagy kicsinyíthető, a szoftver minden pillanatban újraszámolja a képleteket, így a szélek mindig tökéletesen élesek maradnak.</td>
+            </tr>
+            <tr>
+                <td><strong>Fájlméret</strong></td>
+                <td>A kép méretétől (felbontásától) és színmélységétől függ. Egy nagyobb felbontású kép fájlmérete drasztikusan megnő.</td>
+                <td>Kifejezetten kicsi. Nem a mérettől, hanem kizárólag a képen lévő alakzatok bonyolultságától (számától) függ.</td>
+            </tr>
+            <tr>
+                <td><strong>Részletgazdagság</strong></td>
+                <td>Ideális összetett, folytonos színátmenetű képekhez, mint a digitális fotók vagy a valósághű ábrázolások.</td>
+                <td>Grafikus formákhoz, logókhoz, ikonokhoz, tipográfiához és műszaki rajzokhoz ideális. Valósághű fotók leírására alkalmatlan.</td>
+            </tr>
+            <tr>
+                <td><strong>Átváltás</strong></td>
+                <td>**Vektorizálás:** Nehéz és pontatlan folyamat. Szoftveres algoritmusok próbálják megkeresni a kontúrokat.</td>
+                <td>**Raszterizálás:** Rendkívül egyszerű és tökéletes folyamat. A matematikai alakzatokat egy adott rácsra vetítve pixelekké alakítjuk.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. Tipikus rasztergrafikus fájlformátumok</h3>
+    <ul>
+        <li><strong>JPG / JPEG:</strong> Veszteséges tömörítésű formátum. Fotók tárolására kiváló, mert a fájlméret kicsi, de a tömörítési műhibák (leletek) láthatóak a finom részleteknél. **Nem támogatja az átlátszóságot (alfa csatornát).**</li>
+        <li><strong>PNG:</strong> Veszteségmentes tömörítésű formátum. Webes grafikákhoz, screenshotokhoz ideális. **Támogatja a teljes átlátszóságot.** Hátránya, hogy fotók esetén a fájlméret túl nagy marad.</li>
+        <li><strong>WEBP:</strong> Modern, Google által fejlesztett webes formátum. Támogat veszteséges és veszteségmentes tömörítést, valamint átlátszóságot is. Sokkal kisebb fájlméretet produkál, mint a JPG vagy a PNG azonos minőség mellett.</li>
+    </ul>
+
+    <h3>4. Tipikus vektorgrafikus fájlformátumok</h3>
+    <ul>
+        <li><strong>SVG (Scalable Vector Graphics):</strong> XML alapú nyílt szabvány. Mivel tiszta szöveges kód építi fel, a webböngészők natívan képesek értelmezni és CSS-sel vagy JavaScripttel animálni. Reszponzív webdesign alapköve.</li>
+        <li><strong>EPS (Encapsulated PostScript):</strong> Professzionális, nyomdaipari szabvány formátum. Komplex grafikai anyagok, kiadványok átvitelére szolgál. Magas szinten megőrzi a vektorokat és a betűtípusokat.</li>
+        <li><strong>AI / CDR:</strong> Natív, gyártóspecifikus vektorfájlok (Adobe Illustrator, CorelDRAW). Teljes szerkeszthetőséget biztosítanak, de csak a saját programjukkal nyithatók meg veszteségmentesen.</li>
+    </ul>
+
+    <h3>5. Színmodellek (Vizsgázói pluszpontok)</h3>
+    <ul>
+        <li>A fájlformátumok kiválasztásakor kötelező figyelni a célra:
+            <ul>
+                <li><strong>RGB (Red, Green, Blue):</strong> Additív (színkeverési) modell. Monitorok, kijelzők, webes grafikák (PNG, JPG, SVG) esetén használatos, ahol a fények összeadódásából jön létre a fehér.</li>
+                <li><strong>CMYK (Cyan, Magenta, Yellow, Key/Black):</strong> Szubtraktív modell. Nyomtatás és fizikai kiadványok (főként EPS, PDF) esetén használatos, ahol a festékek elnyelik a fényt, és összeadódva feketét (vagy sötétbarnát) adnak.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
