@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Karakter- és stílusformázás</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Karakter- és stílusformázás nagy dokumentumokban</h1>
+
+    <h3>1. Karakter- és bekezdésformázás különbsége stílusokkal</h3>
+    <ul>
+        <li><strong>Stílus (Style):</strong> Formázási beállítások (betűtípus, méret, igazítás, sorköz, stb.) elnevezett és elmentett csoportja, amely egyetlen lépésben alkalmazható a szövegre.</li>
+    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Szempont</th>
+                <th>Karakterstílus (Character Style)</th>
+                <th>Bekezdésstílus (Paragraph Style)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Hatókör</strong></td>
+                <td>Kijelölt szavakra, karakterekre vagy betűkre vonatkozik a bekezdésen belül.</td>
+                <td>A teljes kijelölt bekezdésre (vagy arra a bekezdésre, amiben a kurzor áll) vonatkozik a következő entertig.</td>
+            </tr>
+            <tr>
+                <td><strong>Tipikus beállítások</strong></td>
+                <td>Betűtípus, betűméret, betűstílus (félkövér, dőlt), szín, aláhúzás.</td>
+                <td>Sorok igazítása, sorköz, térköz (előtte/utána), behúzások, tabulátorok, szegélyek.</td>
+            </tr>
+            <tr>
+                <td><strong>Példa alkalmazásra</strong></td>
+                <td>Egy fontos szakszó kiemelése a szövegtörzsben (dőlt és kék).</td>
+                <td>Címsorok (Címsor 1, Címsor 2), Normál szövegtörzs, Felsorolások.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>2. Stílusok használatának előnyei nagy dokumentumokban</h3>
+    <ul>
+        <li><strong>Konzisztencia és egységesség:</strong> Garantálja, hogy a dokumentum összes azonos szintű eleme (pl. minden főfejezetcím) hajszálpontosan ugyanúgy nézzen ki a több száz oldalas anyagban is.</li>
+        <li><strong>Globális és azonnali módosíthatóság:</strong> Ha megváltozik az arculat, nem kell egyesével átnyálazni az oldalszámokat. Elég a stílus definícióját módosítani (pl. a Címsor 1-et Arialról Times New Romanra váltani), és a dokumentumban az összes ilyen stílusú elem azonnal, automatikusan frissül.</li>
+        <li><strong>Strukturáltság és automatizálás:</strong> A bekezdésstílusok (főként a hierarchikus Címsor 1, Címsor 2 stb.) határozzák meg a dokumentum logikai vázát. Ezen struktúra megléte alapfeltétele a későbbi automatikus funkcióknak.</li>
+    </ul>
+
+    <h3>3. Élőfej, élőláb és az oldalszámozás automatizálása</h3>
+    <ul>
+        <li><strong>Élőfej (Header) és Élőláb (Footer):</strong> A dokumentum felső és alsó margóján belüli speciális területek, amelyek tartalma (pl. könyv címe, fejezet neve, szerző) automatikusan ismétlődik a dokumentum oldalain.</li>
+        <li><strong>Mezők (Fields) használata:</strong> Az élőfejbe és élőlábba tilos fixen beírni az oldalszámokat vagy az aktuális dátumot. Erre a célra **mezőket** (pl. *Oldalszám*, *Oldalak száma*, *Dátum*) kell beszúrni, amelyek dinamikusan változnak az operációs rendszer vagy a dokumentum aktuális állapota alapján.</li>
+        <li><strong>Szakaszok (Sections) szerepe:</strong> Ha a dokumentumban bizonyos oldalakon (pl. címlapon, tartalomjegyzéken) nem akarunk oldalszámot megjeleníteni, vagy fejezetenként eltérő élőfejet szeretnénk, a dokumentumot **szakaszokra** kell bontanunk. A szakaszok között a "Csatolás az előzőhöz" opció kikapcsolásával függetleníthető a fej- és lábléc tartalma.</li>
+    </ul>
+
+    <h3>4. Automatikus tartalomjegyzék (Table of Contents)</h3>
+    <ul>
+        <li><strong>Előfeltétel:</strong> Automatikus tartalomjegyzéket kizárólag akkor tud generálni a szövegszerkesztő, ha a dokumentum címeit és alcímeit beépített **Címsor (Heading) stílusokkal** formáztuk meg.</li>
+        <li><strong>Működése:</strong> A program végigpásztázza a dokumentumot, kigyűjti a Címsor stílusú szövegeket, hozzárendeli a hozzájuk tartozó aktuális oldalszámot, és beilleszti a jegyzéket.</li>
+        <li><strong>Frissíthetőség:</strong> Ha a szöveg bővülése miatt eltolódnak az oldalak vagy megváltozik egy fejezet címe, a tartalomjegyzékre jobb gombbal kattintva az egyetlen mozdulattal **frissíthető (Mező frissítése)**, így kizárt a kézi elírás vagy a téves oldalszám.</li>
+    </ul>
+
+    <h3>5. Az elválasztás szabályai és a tipográfiai hibák elkerülése</h3>
+    <ul>
+        <li><strong>Automatikus vs. Manuális elválasztás:</strong> Sorkizárt szövegnél a program a túl nagy szóközök (csúnya fehér foltok a lapon) elkerülésére elválasztja a szavakat. A kézi kötőjel használata tilos, mert a szöveg módosításakor a szó elmozdulhat, és a kötőjel a sor közepén maradhat. Ehelyett **feltételes kötőjelet** (Ctrl + kötőjel) kell használni, ami csak akkor jelenik meg, ha a szó valóban a sor végére kerül.</li>
+        <li><strong>Nem bontható szóköz (Non-breaking space / Ctrl + Shift + Szóköz):</strong> Megakadályozza, hogy két egymáshoz tartozó kifejezés a sor végén kettéváljon (pl. egy szám és a mértékegysége: <code>10 kg</code>, vagy egy egybetűs kötőszó és a következő szó: <code>a ház</code>).</li>
+        <li><strong>Fattyúsor és árvasor (Widow and Orphan control):</strong> Szigorú tipográfiai hiba a bekezdések rossz törése a lapvégeken.
+            <ul>
+                <li>**Árvasor:** A bekezdés első sora magányosan a lap alján marad, miközben a többi átkerül a következő oldalra.</li>
+                <li>**Fattyúsor:** A bekezdés utolsó sora magányosan átkerül a következő lap tetejére. Védelme a szoftverben bekapcsolható ("Fattyú- és árvasorok elleni védelem").</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
