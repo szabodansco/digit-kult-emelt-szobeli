@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Adatbázisok tervezése</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #f7fafc;
+            padding: 1px 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Adatbázisok tervezése, kényszerek és a normalizálás elve</h1>
+
+    <h3>1. Az adatbázis-séma fogalma</h3>
+    <ul>
+        <li><strong>Definíció:</strong> Az adatbázis-séma az adatbázis logikai és szerkezeti leírása, az adatbázis "kéknyoma" (tervrajza). Nem a konkrét adatokat tartalmazza, hanem a táblák nevét, a mezőket, azok adattípusait, a kulcsokat és a táblák közötti kapcsolatokat.</li>
+        <li><strong>Fizikai vs. Logikai séma:</strong> A logikai séma a táblák elméleti struktúráját határozza meg, míg a fizikai séma azt írja le, hogy ezek az adatok hogyan tárolódnak ténylegesen a háttértáron (fájlok, indexek formájában).</li>
+    </ul>
+
+    <h3>2. Adatbázis-kényszerek (Constraints)</h3>
+    <ul>
+        <li>A kényszerek olyan szabályok, amelyeket az adatbázis-kezelő (DBMS) kényszerít ki az adatok bevitele vagy módosítása során, biztosítva az adatok pontosságát, megbízhatóságát és konzisztenciáját.</li>
+    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Kényszer típus</th>
+                <th>Működési elv és feladat</th>
+                <th>Gyakorlati példa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>NOT NULL</strong></td>
+                <td>Megakadályozza, hogy az adott mező értéke üresen maradjon. Kötelező adatot megadni.</td>
+                <td>A felhasználó regisztrációjakor a <code>jelszo</code> mező nem lehet üres.</td>
+            </tr>
+            <tr>
+                <td><strong>UNIQUE</strong></td>
+                <td>Garantálja, hogy az oszlopban minden érték különböző (egyedi) legyen.</td>
+                <td>Az <code>email_cim</code> oszlopban nem szerepelhet kétszer ugyanaz az e-mail.</td>
+            </tr>
+            <tr>
+                <td><strong>CHECK</strong></td>
+                <td>Egy logikai feltételhez köti a bevihető értéket. Csak igaz (TRUE) esetén engedi az írást.</td>
+                <td><code>CHECK (eletkor >= 18)</code> &rarr; nem enged be kiskorút a rendszerbe.</td>
+            </tr>
+            <tr>
+                <td><strong>DEFAULT</strong></td>
+                <td>Alapértelmezett értéket ad a mezőnek, ha a rögzítéskor nem adunk meg semmit.</td>
+                <td><code>DEFAULT 'Magyarország'</code> az ország mező értéke automatikusan.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. Referenciális integritás (Foreign Key Constraint)</h3>
+    <ul>
+        <li><strong>Fogalma:</strong> A táblák közötti kapcsolatok pontosságát és érvényességét biztosító szabályrendszer. Kimondja: **az idegen kulcs értéke csak olyan érték lehet, amely létezik a kapcsolt tábla elsődleges kulcsaként** (vagy értéke lehet NULL, ha a kapcsolat opcionális).</li>
+        <li><strong>A probléma:</strong> Megakadályozza az "árva rekordok" létrejöttét. (Pl. Nem engedi, hogy egy diákhoz olyan <code>osztaly_id</code>-t rendeljünk, ami nem is létezik az *Osztalyok* táblában).</li>
+        <li><strong>Karbantartási műveletek törlés/módosítás esetén:</strong> Mi történjen az N oldali rekorddal, ha az 1 oldalon töröljük a szülőt?
+            <ul>
+                <li>**RESTRICT / NO ACTION (Tiltás):** A rendszer nem engedi törölni az osztályt, amíg legalább egy diák hozzátartozik. (Ez az alapértelmezett, legbiztonságosabb működés).</li>
+                <li>**CASCADE (Görgetés):** Ha töröljük az osztályt, a rendszer automatikusan törli az összes oda járó diákot is.</li>
+                <li>**SET NULL:** Ha töröljük az osztályt, a hozzá tartozó diákok <code>osztaly_id</code> mezője üres (NULL) lesz.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>4. Redundancia kiszűrése és a normalizálás (1NF, 2NF, 3NF)</h3>
+    <ul>
+        <li><strong>Adatredundancia:</strong> Az adatok felesleges ismétlődése az adatbázisban. Hátrányai: pazarolja a tárhelyet, és **módosítási anomáliákhoz** vezet (ha az adat megváltozik, több helyen kell átírni; ha valahol kimarad, az adatbázis ellentmondásossá válik).</li>
+        <li><strong>Normalizálás:</strong> Olyan tervezési folyamat (algoritmus), amely során a táblákat logikusan feldaraboljuk, hogy megszüntessük a redundanciát. Emelt szinten az első három normálforma (NF) ismerete kötelező:
+            <ul>
+                <li><strong>1NF (Első normálforma):</strong> Egy tábla akkor van 1NF-ben, ha **minden mezője atomi (tovább nem bontható) értéket tartalmaz**, és nincsenek ismétlődő oszlopcsoportok. (Pl. a <code>lakcim</code> mezőt szét kell bontani <i>varos</i>, <i>utca</i>, <i>hazszam</i> mezőkre).</li>
+                <li><strong>2NF (Második normálforma):</strong> Teljesül az 1NF, és **minden nemkulcs mező teljes mértékben függ a teljes elsődleges kulcstól**. Ez a kényszer csak összetett (több mezőből álló) elsődleges kulcsok esetén releváns: nem megengedett, hogy egy tulajdonság csak az összetett kulcs egyik felétől függjön. Ha igen, azt külön táblába kell szervezni.</li>
+                <li><strong>3NF (Harmadik normálforma):</strong> Teljesül a 2NF, és **a nemkulcs mezők között nincs tranzitív függőség**. Ez azt jelenti, hogy egy nemkulcs mező nem függhet egy másik nemkulcs mezőtől, kizárólag az elsődleges kulcstól. (Pl. Ha a *Diak* táblában benne van az <code>iskola_id</code> és az <code>iskola_neve</code> is, az 3NF hibás, mert az iskola neve az azonosítójától függ, nem a diáktól &rarr; az iskola adatait külön táblába kell tenni).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
