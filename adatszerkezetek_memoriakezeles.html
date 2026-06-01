@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Adatszerkezetek és memóriakezelés</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #f7fafc;
+            padding: 1px 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Adatszerkezetek és azok memóriakezelése</h1>
+
+    <h3>1. Elemi (Primitív) adattípusok a memóriában</h3>
+    <ul>
+        <li><strong>Egész szám (Integer):</strong> Általában 2, 4 vagy 8 bájton tárolódik. Fix méretű. Kettes számrendszerbeli alakban, előjeles számok esetén **kettes komplemens** formában íródik be a RAM-ba.</li>
+        <li><strong>Lebegőpontos szám (Float / Double):</strong> Törtszámok tárolására. Az **IEEE 754 szabvány** szerint épül fel: külön bájtok tárolják az előjelet, a karakterisztikát (kitevőt) és a mantisszát (értékes jegyeket). Emiatt kerekítési pontatlanságok léphetnek fel.</li>
+        <li><strong>Karakter (Char):</strong> Egyetlen betű vagy szimbólum. Fix méretű (ASCII esetén 1 bájt, UTF-16/Unicode esetén 2 bájt). Valójában a karakter kódjának megfelelő egész számként tárolódik.</li>
+        <li><strong>Logikai (Boolean):</strong> Logikai igaz (<code>True / 1</code>) vagy hamis (<code>False / 0</code>) érték. Elméletileg 1 bit elég lenne, de a hardver architektúra miatt a RAM-ban 1 teljes bájtot foglal el (címzési okokból).</li>
+    </ul>
+
+    <h3>2. Összetett struktúrák: Tömb vs. Dinamikus lista</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Szempont</th>
+                <th>Tömb (Array / Statikus szerkezet)</th>
+                <th>Lista (Linked List / Dinamikus szerkezet)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Méretkezelés</strong></td>
+                <td>**Statikus.** A méretét a létrehozásakor fixen meg kell adni, futás közben nem változtatható meg.</td>
+                <td>**Dinamikus.** Futás közben tetszőlegesen bővíthető vagy csökkenthető, nincs fix méretkorlát.</td>
+            </tr>
+            <tr>
+                <td><strong>Elhelyezkedés a RAM-ban</strong></td>
+                <td>**Folytonos memóriaterület.** Az elemek szorosan egymás mögött, zárt blokkban helyezkednek el.</td>
+                <td>**Szétszórt memóriaterület.** Az elemek bárhol lehetnek a memóriában (a szabad területen, a heap-en).</td>
+            </tr>
+            <tr>
+                <td><strong>Belső felépítés</strong></td>
+                <td>Csak a tiszta adatértékeket tárolja egymás után.</td>
+                <td>Minden elem egy csomópont (node), ami az **adaton** kívül tartalmaz egy **mutatót (pointert)** is, ami a következő elem memóriacímére mutat.</td>
+            </tr>
+            <tr>
+                <td><strong>Elem elérése (Keresés)</strong></td>
+                <td>**Ultra gyors, közvetlen elérés (O(1)).** Az index alapján a CPU egyetlen matematikai szorzással kiszámolja a keresett elem memóriacímét.</td>
+                <td>**Lassú, soros elérés (O(n)).** Az első elemtől indulva a mutatókon végighaladva (láncolat) kell elnavigálni a kívánt elemig.</td>
+            </tr>
+            <tr>
+                <td><strong>Bővítés / Törlés</strong></td>
+                <td>Lassú és nehézkes. Új, nagyobb tömböt kell foglalni, és mindent átmásolni.</td>
+                <td>Rendkívül gyors. Elég a szomszédos elemek mutatóit (címeit) átírni, nincs adatmozgatás.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. Sztringek (Karakterláncok) speciális kezelése</h3>
+    <ul>
+        <li><strong>A sztring fogalma:</strong> Karakterekből álló sorozat, amely technikailag egy egydimenziós tömbnek tekinthető a háttérben.</li>
+        <li><strong>Lezárás és hosszkezelés a memóriában (Két fő iskola):</strong>
+            <ul>
+                <li>**Null-terminated (C-stílus):** A karakterek folytonos tömbben vannak, és a lánc végét egy speciális, nullás értékű bájt (<code>\0</code> - null karakter) jelzi. Hátránya: a sztring hosszának megállapításához végig kell olvasni a memóriát a nulláig.</li>
+                <li>**Hossz-előtagos (Length-prefixed / Pascal/Java/Python-stílus):** A karakterlánc előtt a memória tartalmaz egy fix méretű egész számot (pl. 4 bájton), ami pontosan megadja a sztring aktuális hosszát. Így a hossz lekérdezése azonnali.</li>
+            </ul>
+        </li>
+        <li><strong>Megváltoztathatatlanság (Immutability):</strong> Sok modern nyelvben (pl. Python, Java, C#) a sztringek immutábilis objektumok. Ez azt jelenti, hogy ha módosítasz egy sztringet (pl. hozzáfűzöl egy karaktert), a rendszer nem a régi helyen írja át a RAM-ot, hanem **egy teljesen új helyen hoz létre egy új sztringet**, a régit pedig törli a memóriából (Garbage Collector). Ez biztonságos, de intenzív szövegműveleteknél lassíthatja a futást.</li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
