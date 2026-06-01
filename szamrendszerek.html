@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Számrendszerek</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #f7fafc;
+            padding: 1px 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Számrendszerek elmélete és az átváltások módszerei</h1>
+
+    <h3>1. Helyiértékes számrendszerek alapjai</h3>
+    <ul>
+        <li><strong>Alapfogalom:</strong> A modern informatikában poliadikus (helyiértékes) számrendszereket használunk. Egy $q$ alapú számrendszerben pontosan $q$ darab alapszimbólumot (számjegyet) használunk ($0$-tól $q-1$-ig).</li>
+        <li><strong>Alaki érték, helyiérték, valódi érték:</strong> Egy számjegy valódi értékét az alaki értékének és a pozíciójához tartozó helyiértéknek (az alap megfelelő hatványának) a szorzata adja meg.</li>
+    </ul>
+
+    <h3>2. Az informatikában használt fő számrendszerek</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Számrendszer</th>
+                <th>Alap ($q$)</th>
+                <th>Használt számjegyek / karakterek</th>
+                <th>Informatikai jelentőség és példa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Kettes (Bináris)</strong></td>
+                <td>2</td>
+                <td><code>0, 1</code></td>
+                <td>A hardver elemi logikai kapuinak és memóriacelláinak állapota (ki/be).</td>
+            </tr>
+            <tr>
+                <td><strong>Nyolcas (Oktális)</strong></td>
+                <td>8</td>
+                <td><code>0, 1, 2, 3, 4, 5, 6, 7</code></td>
+                <td>A bináris kódok tömörítése. Leggyakrabban Linux jogosultságoknál (pl. <code>755</code>).</td>
+            </tr>
+            <tr>
+                <td><strong>Tízes (Decimális)</strong></td>
+                <td>10</td>
+                <td><code>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</code></td>
+                <td>Az emberi használatra szánt adatok, eredmények megjelenítése.</td>
+            </tr>
+            <tr>
+                <td><strong>Tizenhatos (Hexadecimális)</strong></td>
+                <td>16</td>
+                <td><code>0-9</code> és <code>A=10, B=11, C=12, D=13, E=14, F=15</code></td>
+                <td>Memóriacímek, IPv6 címek, RGB színkódok (pl. <code>#FF5733</code>) tömör ábrázolása.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. Átváltások elmélete és algoritmusai</h3>
+    <ul>
+        <li><strong>Bármely számrendszerből tízesbe (Hatványozás módszere):</strong> A számjegyeket jobbról balra haladva megszorozzuk a számrendszer alapjának növekvő hatványaival ($q^0, q^1, q^2 \dots$), majd a részszorzatokat összeadjuk.
+            <br>&bull; *Példa ($1101_2$ &rarr; $X_{10}$):* $1 \cdot 2^3 + 1 \cdot 2^2 + 0 \cdot 2^1 + 1 \cdot 2^0 = 8 + 4 + 0 + 1 = 13_{10}$.
+        </li>
+        <li><strong>Tízes számrendszerből bárhová (Maradékos osztás):</strong> A tízes számat ismételten elosztjuk a célrendszer alapjával ($q$). A kapott maradékokat feljegyezzük, az osztást pedig addig ismételjük, amíg a hányados $0$ nem lesz. A keresett számot a maradékok **lentről felfelé** (visszafelé) történő összeolvasásával kapjuk.
+        </li>
+    </ul>
+
+    <h3>4. Gyorsított átváltások (A 2 hatványai között)</h3>
+    <ul>
+        <li><strong>A közvetlen kapcsolat elve:</strong> Mivel $8 = 2^3$ és $16 = 2^4$, a kettes, nyolcas és tizenhatos számrendszerek között nincs szükség a tízes számrendszeren keresztüli, nehézkes oda-vissza váltásra. Az átváltás tiszta csoportosítással elvégezhető.</li>
+        <li><strong>Bináris &harr; Hexadecimális (4 bites szabály):</strong> 
+            <ul>
+                <li>**Binárisból hexába:** A bináris számot a végétől (jobbról) kezdve **4 bites csoportokra (tetrádokra)** bontjuk. Ha a bal szélső csoport nem teljes, nullákkal egészítjük ki. Minden 4 bites csoportot külön-külön átváltunk a megfelelő tizenhatos karakterré ($0 \dots F$).
+                    <br>&bull; *Példa:* <code>111011_2</code> &rarr; csoportosítva: <code>0011</code> és <code>1011</code> &rarr; <code>0011_2 = 3</code>, <code>1011_2 = 11 = B</code> &rarr; Eredmény: <code>3B_16</code>.
+                </li>
+                <li>**Hexából binárisba:** A tizenhatos szám minden egyes jegyét pontosan egy-egy **4 bites bináris számmá** írjuk le.
+                    <br>&bull; *Példa:* <code>A5_16</code> &rarr; <code>A = 10 = 1010_2</code>, és <code>5 = 0101_2</code> &rarr; Eredmény: <code>10100101_2</code>.
+                </li>
+            </ul>
+        </li>
+        <li><strong>Bináris &harr; Oktális (3 bites szabály):</strong> Ugyanaz a módszer, mint a hexadecimálisnál, de a szám alapja miatt ($2^3=8$) a számokat **3 bites csoportokra (triádokra)** bontjuk vagy alakítjuk át.
+            <br>&bull; *Példa:* <code>101110_2</code> &rarr; csoportosítva: <code>101</code> és <code>110</code> &rarr; <code>101_2 = 5</code>, <code>110_2 = 6</code> &rarr; Eredmény: <code>56_8</code>.
+        </li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
