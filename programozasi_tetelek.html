@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Programozási tételek</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            font-size: 11px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 5px 7px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #f1f5f9;
+            padding: 1px 3px;
+            border: 1px solid #cbd5e0;
+            border-radius: 3px;
+            font-size: 11px;
+            display: block;
+            white-space: pre;
+            line-height: 1.2;
+            margin-top: 3px;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Programozási tételek elmélete és algoritmusai</h1>
+
+    <h3>1. Alapfogalmak és a bemenet</h3>
+    <ul>
+        <li><strong>Programozási tétel:</strong> Gyakran előforduló, általánosított feladattípusok absztrakt, optimális megoldási algoritmusa.</li>
+        <li><strong>Kiindulási alap (Bemenet):</strong> Egy $N$ elemű sorozat (tömb vagy lista), ahol az elemeket $T[1 \dots N]$ jelöli. Feltételezzük, hogy az indexelés 1-től indul, a feltételeket (tulajdonságokat) pedig egy $F(x)$ logikai függvénnyel adjuk meg.</li>
+    </ul>
+
+    <h3>2. Alapvető programszámlálási és statisztikai tételek</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 18%;">Tétel neve</th>
+                <th style="width: 42%;">Élőszavas magyarázat / Működés</th>
+                <th style="width: 40%;">Pszeudokód</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Összegzés<br>(Summation)</strong></td>
+                <td>Létrehozunk egy összegző változót, amelyet **0-val inicializálunk**. Egy ciklussal végigmegyünk a sorozat összes elemén, és minden lépésben hozzáadjuk az aktuális elem értékét az összegző változóhoz.</td>
+                <td><code>osszeg = 0
+CIKLUS i = 1-TŐL N-IG
+    osszeg = osszeg + T[i]
+CIKLUS VÉGE
+KI: osszeg</code></td>
+            </tr>
+            <tr>
+                <td><strong>Megszámlálás<br>(Counting)</strong></td>
+                <td>Létrehozunk egy számláló változót, amelyet **0-val inicializálunk**. Végigmegyünk a sorozaton, és egy elágazással megvizsgáljuk, hogy az aktuális elem teljesíti-e az $F$ feltételt. Ha igen, a számlálót növeljük eggyel.</td>
+                <td><code>db = 0
+CIKLUS i = 1-TŐL N-IG
+    HA F(T[i]) AKKOR
+        db = db + 1
+    HA VÉGE
+CIKLUS VÉGE
+KI: db</code></td>
+            </tr>
+            <tr>
+                <td><strong>Szélsőérték<br>keresés<br>(Min/Max)</strong></td>
+                <td>Kikiáltjuk a **legelső elemet** az eddigi legnagyobbnak (vagy legkisebbnek), és elmentjük az értékét (vagy indexét). A 2. elemtől kezdve végigmegyünk a sorozaton. Ha találunk az eddiginél nagyobb elemet, felülírjuk a mentett értéket.</td>
+                <td><code>max_ert = T[1]
+CIKLUS i = 2-TŐL N-IG
+    HA T[i] > max_ert AKKOR
+        max_ert = T[i]
+    HA VÉGE
+CIKLUS VÉGE
+KI: max_ert</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>3. Logikai és keresési tételek (Feltételhez kötött algoritmusok)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 18%;">Tétel neve</th>
+                <th style="width: 42%;">Élőszavas magyarázat / Működés</th>
+                <th style="width: 40%;">Pszeudokód</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Eldöntés<br>(Decision)</strong></td>
+                <td>Megvizsgáljuk, hogy van-e **legalább egy** $F$ tulajdonságú elem a sorozatban. **Elöltesztelő ciklust** használunk: addig lépkedünk, amíg a sorozat végére nem érünk, VAGY amíg meg nem találjuk az első igaz elemet. A ciklus után a leállás okát ellenőrizzük.</td>
+                <td><code>i = 1
+CIKLUS AMÍG i <= N ÉS NEM F(T[i])
+    i = i + 1
+CIKLUS VÉGE
+van_ilyen = (i <= N)
+KI: van_ilyen</code></td>
+            </tr>
+            <tr>
+                <td><strong>Kiválasztás<br>(Selection)</strong></td>
+                <td>**Biztosan tudjuk**, hogy a sorozat tartalmaz legalább egy $F$ tulajdonságú elemet, és a feladat ennek az elemnek az **indexének** megkeresése. Mivel az elem létezése garantált, nem kell ellenőrizni a túlindexelést, csak addig lépkedünk, amíg rá nem bukkanunk.</td>
+                <td><code>i = 1
+CIKLUS AMÍG NEM F(T[i])
+    i = i + 1
+CIKLUS VÉGE
+KI: i</code></td>
+            </tr>
+            <tr>
+                <td><strong>Keresés<br>(Linear Search)</strong></td>
+                <td>Az **Eldöntés és a Kiválasztás kombinációja**. Nem tudjuk, hogy létezik-e az elem. Egy elöltesztelő ciklussal lépkedünk. Ha a ciklus végén az indexünk beljebb van, mint a sorozat hossza, akkor megtaláltuk az elemet, és megadjuk a pozícióját, különben jelezzük, hogy nincs benne.</td>
+                <td><code>i = 1
+CIKLUS AMÍG i <= N ÉS NEM F(T[i])
+    i = i + 1
+CIKLUS VÉGE
+HA i <= N AKKOR
+    KI: "Megvan, indexe: ", i
+KÜLÖNBEN
+    KI: "Nincs ilyen elem"
+HA VÉGE</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>4. Vizsgáztatói csapda: Keresések hatékonysága (Lineáris vs. Bináris)</h3>
+    <ul>
+        <li><strong>Lineáris (Keresés tétel):</strong> Bármilyen sorozaton működik. A legrosszabb esetben végig kell nézni mind az $N$ elemet, így a lépésszáma a sorozat méretével egyenesen arányos ($O(N)$ komplexitás).</li>
+        <li><strong>Bináris (Logaritmikus) keresés:</strong> Kizárólag **rendezett sorozaton** működik! Minden lépésben megnézzük a tartomány középső elemét. Ha a keresett érték kisebb, a tartomány bal felét, ha nagyobb, a jobb felét felezzük tovább. Lépésszáma drasztikusan kevesebb ($O(\log_2 N)$ komplexitás / pl. 1 millió elemet legfeljebb 20 lépésből megtalál).</li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
