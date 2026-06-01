@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Relációs adatbázis-modell</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #f7fafc;
+            padding: 1px 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>A relációs adatbázis-modell alapfogalmai</h1>
+
+    <h3>1. Az adatbázis és a relációs modell lényege</h3>
+    <ul>
+        <li><strong>Adatbázis (Database):</strong> Strukturált, egymással kapcsolatban álló adatok zárt halmaza, amelyet egy célszoftver (DBMS - Adatbázis-kezelő Rendszer) kezel.</li>
+        <li><strong>Relációs adatbázis-modell:</strong> Edgar F. Codd által kidolgozott modell, ahol az adatok tárolása kétdimenziós **táblázatokban (relációkban)** történik. Az adatok közötti kapcsolatokat nem fizikai mutatók, hanem a táblákban tárolt közös értékek (kulcsok) hozzák létre.</li>
+    </ul>
+
+    <h3>2. A relációs adatbázis alapelemei</h3>
+    <ul>
+        <li><strong>Tábla (Table / Reláció):</strong> Az adatbázis alapegysége, amely egy adott entitástípus (pl. <i>Diákok</i>, <i>Vásárlások</i>) tulajdonságait és egyedeit fogja össze.</li>
+        <li><strong>Mező (Field / Attribútum):</strong> A táblázat **oszlopa**. Egy adott tulajdonságot reprezentál. Minden mezőhöz kötelezően tartozik egy **adattípus** (pl. egész szám, szöveg, dátum), amely meghatározza, hogy milyen értékeket vehet fel.</li>
+        <li><strong>Rekord (Record / Sor / Tuplusz):</strong> A táblázat **sora**. Egy konkrét egyed (entitás) adatainak halmaza (pl. egy konkrét diák összes adata). Egy soron belül az adatok összetartoznak.</li>
+    </ul>
+
+    <h3>3. Mintapélda: "Diakok" tábla strukturális felépítése</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>diak_id (Mező / Elsődleges kulcs)</th>
+                <th>nev (Mező / Szöveg típus)</th>
+                <th>szuletesi_datum (Mező / Dátum típus)</th>
+                <th>osztaly_id (Mező / Idegen kulcs)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>1</code></td>
+                <td>Kovács Anna</td>
+                <td>2008-05-12</td>
+                <td><code>10A</code></td>
+                <td>&larr; ez itt egy <strong>Rekord (Sor)</strong></td>
+            </tr>
+            <tr>
+                <td><code>2</code></td>
+                <td>Nagy Márk</td>
+                <td>2007-11-23</td>
+                <td><code>11B</code></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>4. Kulcsok szerepe és típusai</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Kulcs típus</th>
+                <th>Elsődleges kulcs (Primary Key - PK)</th>
+                <th>Idegen kulcs (Foreign Key - FK)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Definíció</strong></td>
+                <td>A tábla azon mezője (vagy mezőcsoportja), amely a tábla minden egyes rekordját **egyértelműen és egyedileg azonosítja**.</td>
+                <td>Egy tábla azon mezője, amely egy **másik tábla elsődleges kulcsára hivatkozik**, összekötve a két táblát.</td>
+            </tr>
+            <tr>
+                <td><strong>Egyediség</strong></td>
+                <td>**Szigorúan egyedi.** Nem szerepelhet kétszer ugyanaz az érték a tábla adott oszlopában.</td>
+                <td>**Nem kötelező egyedinek lennie.** Ugyanaz az érték többször is szerepelhet (pl. több diáknak is lehet ugyanaz az osztályazonosítója).</td>
+            </tr>
+            <tr>
+                <td><strong>Null érték</strong></td>
+                <td>**Nem lehet üres (NOT NULL).** Minden rekordnak kötelezően kell, hogy legyen elsődleges kulcsa.</td>
+                <td>**Lehet üres (NULL)**, ha a logikai kapcsolat az adott rekordnál még nem jött létre.</td>
+            </tr>
+            <tr>
+                <td><strong>Számosság</strong></td>
+                <td>Egy táblának **pontosan egy** elsődleges kulcsa lehet (ami állhat több mezőből is: összetett kulcs).</td>
+                <td>Egy táblának **több különböző idegen kulcsa is lehet**, ha több másik táblához is kapcsolódik.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>5. Kapcsolattípusok (Relációk)</h3>
+    <ul>
+        <li>A kulcsok segítségével háromféle kapcsolat jöhet létre két tábla között:
+            <ul>
+                <li><strong>1:1 (Egy-az-egyhez):</strong> Az 'A' tábla egy rekordjához a 'B' tábla legfeljebb egy rekordja kapcsolódhat, és fordítva (pl. <i>Ember</i> &harr; <i>Személyi igazolvány</i>). Ritka, gyakran egy táblába vonják össze őket.</li>
+                <li><strong>1:N (Egy-a-többhöz):</strong> A leggyakoribb kapcsolat. Az 'A' tábla egy rekordjához a 'B' tábla több rekordja is kapcsolódhat, de a 'B' tábla egy rekordjához az 'A' táblából csak egyetlen rekord tartozhat (pl. <i>Osztály</i> &harr; <i>Diákok</i>: egy osztályba több diák jár, de egy diák csak egy osztályba járhat). A kapcsolatot az **N oldalon elhelyezett idegen kulcs** valósítja meg.</li>
+                <li><strong>M:N (Több-a-többhöz):</strong> Az 'A' tábla egy rekordjához a 'B' tábla több rekordja tartozhat, és fordítva (pl. <i>Diákok</i> &harr; <i>Tantárgyak</i>: egy diák több tárgyat tanul, egy tárgyat több diák tanul). A relációs modell ezt közvetlenül nem tudja lekezelni, ezért egy **kapcsolótábla (köztes tábla)** beiktatásával két darab 1:N kapcsolatra kell bontani.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
