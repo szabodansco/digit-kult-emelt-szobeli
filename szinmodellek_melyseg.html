@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - Színmodellek és színmélység</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #f7fafc;
+            padding: 1px 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Színmodellek elmélete és a színmélység fogalma</h1>
+
+    <h3>1. RGB és CMYK színmodellek összehasonlítása</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Szempont</th>
+                <th>RGB színmodell</th>
+                <th>CMYK színmodell</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Alapszínek</strong></td>
+                <td>**R**ed (Vörös), **G**reen (Zöld), **B**lue (Kék)</td>
+                <td>**C**yan (Ciánkék), **M**agenta (Bíborvörös), **Y**ellow (Sárga), **K**ey/Black (Fekete)</td>
+            </tr>
+            <tr>
+                <td><strong>Keverési elv</strong></td>
+                <td>**Additív (Színösszeadó)** színkeverés.</td>
+                <td>**Szubtraktív (Színkivonó)** színkeverés.</td>
+            </tr>
+            <tr>
+                <td><strong>Fizikai működés</strong></td>
+                <td>A színes fények összeadódnak. Minél több fényt vetítünk egymásra, annál világosabb színt kapunk.</td>
+                <td>A fizikai festékrétegek elnyelik (kivonják) a fehér fény egy részét, a maradékot pedig visszaverik.</td>
+            </tr>
+            <tr>
+                <td><strong>Kiindulási alap</strong></td>
+                <td>A **sötétség** (fekete képernyő). Ha nincs fény, feketét látunk.</td>
+                <td>A **fehér papír**, amely a teljes fényspektrumot visszaveri.</td>
+            </tr>
+            <tr>
+                <td><strong>Végeredmény (Maximum)</strong></td>
+                <td>Ha mindhárom alapszín maximális intenzitással ég, **fehér** fényt kapunk.</td>
+                <td>Ha a három alapszínt maximálisan összekeverjük, elméletileg **feketét** (gyakorlatban piszkosbarnát) kapunk.</td>
+            </tr>
+            <tr>
+                <td><strong>Alkalmazás</strong></td>
+                <td>Aktív fényforrások: monitorok, kijelzők, projektorok, digitális kamerák, webes grafikák.</td>
+                <td>Passzív felületek: nyomdaipar, tintasugaras és lézernyomtatók, fizikai kiadványok.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>2. Miért kell a "K" a CMYK modellbe?</h3>
+    <ul>
+        <li>A Cyan, Magenta és Yellow elméletileg kiadja a feketét, de a valóságban a fizikai nyomdafestékek tisztátalansága miatt ez csak egy sötét, maszatos barnás árnyalatot eredményez.</li>
+        <li>A tökéletes kontraszt eléréséhez, valamint a gazdaságosság miatt (a fekete szövegek nyomtatásakor ne kelljen három drága színes tintát elpazarolni) külön fekete (**Key/Black**) komponenst használnak a nyomtatók.</li>
+    </ul>
+
+    <h3>3. A színmélység (Color Depth) fogalma</h3>
+    <ul>
+        <li><strong>Definíció:</strong> A színmélység megmutatja, hogy a számítógép hány biten tárolja egyetlen képpont (pixel) színinformációját. Ez határozza meg, hogy a kép maximálisan hány különböző színárnyalatot képes megjeleníteni.</li>
+        <li><strong>Összefüggés (Matematikai alap):</strong> Ha a színmélység $n$ bit, akkor a maximálisan ábrázolható színek száma: **$2^n$**.</li>
+    </ul>
+
+    <h3>4. Tipikus színmélységek és értelmezésük</h3>
+    <ul>
+        <li><strong>1 bites színmélység (Monokróm):</strong> $2^1 = 2$ szín. Kizárólag tiszta fekete és tiszta fehér pontok léteznek (pl. régi faxok, korai kijelzők).</li>
+        <li><strong>8 bites színmélység (Szürkeárnyalatos vagy indexelt):</strong> $2^8 = 256$ szín. 
+            <ul>
+                <li>Szürkeárnyalat esetén a feketétől a fehérig terjedő 256 átmenet ábrázolható.</li>
+                <li>Indexelt színmód (pl. **GIF** formátum) esetén a képhez egy max. 256 színű paletta (színtáblázat) tartozik, és a bitek ennek a palettának a sorszámaira mutatnak.</li>
+            </ul>
+        </li>
+        <li><strong>24 bites színmélység (True Color - Valódi szín):</strong> $2^{24} = 16\ 777\ 216$ különböző szín. Ez a mai digitális eszközök és monitorok standard felbontása, amely már teljesen lefedi az emberi szem által megkülönböztethető árnyalatok gazdagságát.
+            <ul>
+                <li>**Belső felépítés:** Az RGB csatornák mindegyike (R, G, B) külön-külön **8 bitet (1 bájtot)** kap.</li>
+                <li>Egy csatorna értéke így decimálisan $0$ és $255$ között mozoghat (pl. a tiszta vörös kódja: <code>RGB(255, 0, 0)</code>).</li>
+            </ul>
+        </li>
+        <li><strong>32 bites színmélység (True Color + Alfa csatorna):</strong> Megegyezik a 24 bites színmélységgel (16,7 millió szín), de kiegészül egy plusz **8 bites Alfa (A) csatornával**. Ez a csatorna nem színt hordoz, hanem a pixel **átlátszóságát** szabályozza 256 fokozatban (0 = teljesen átlátszó, 255 = teljesen takaró / pl. PNG formátum).</li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
