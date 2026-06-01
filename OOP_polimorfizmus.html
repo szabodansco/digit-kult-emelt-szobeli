@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emelt Digitális Kultúra Tétel - OOP Alapjai</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 12.5px;
+            line-height: 1.35;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 18px;
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 4px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-size: 13.5px;
+            color: #2b6cb0;
+            background-color: #ebf8ff;
+            padding: 3px 6px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            border-left: 4px solid #3182ce;
+        }
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        strong {
+            color: #2d3748;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 11.5px;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #f7fafc;
+            padding: 1px 4px;
+            border: 1px solid #e2e8f0;
+            border-radius: 3px;
+        }
+        .footer {
+            margin-top: 15px;
+            border-top: 1px dashed #cbd5e0;
+            padding-top: 4px;
+            font-size: 10.5px;
+            color: #718096;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Az objektumorientált programozás (OOP) alapjai</h1>
+
+    <h3>1. Paradigmaváltás és alapfogalmak</h3>
+    <ul>
+        <li><strong>OOP lényege:</strong> Olyan programozási szemléletmód (paradigma), amely a valós világ mintájára építi fel a kódot. Ahelyett, hogy különálló adatokkal és függvényekkel dolgoznánk, az összetartozó adatokat és az azokat kezelő műveleteket egyetlen közös egységbe, úgynevezett **objektumokba** zárjuk.</li>
+    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Fogalom</th>
+                <th>Szakmai definíció</th>
+                <th>Érthető analógia / Példa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Osztály<br>(Class)</strong></td>
+                <td>Egy absztrakt típus, egy **tervrajz** vagy sablon, amely meghatározza, hogy az abból létrehozott objektumok milyen adatokkal és működéssel rendelkezzenek. Nem foglal helyet a memóriában.</td>
+                <td>Az autó **gyári tervrajza**. Leírja, hogy az autónak van színe, rendszáma (tulajdonságok), és képes haladni vagy dudálni (metódusok).</td>
+            </tr>
+            <tr>
+                <td><strong>Objektum<br>(Object / Példány)</strong></td>
+                <td>Az osztály alapján ténylegesen létrehozott, konkretizált entitás (**példány**). Rendelkezik saját állapottal, egyedi adatokkal, és helyet foglal el a memóriában.</td>
+                <td>A parkolóban álló **konkrét piros autó**, aminek a rendszáma <code>ABC-123</code>. Ez a tervrajz alapján legyártott valódi példány.</td>
+            </tr>
+            <tr>
+                <td><strong>Mező / Attribútum</strong></td>
+                <td>Az osztályon belül definiált **változó**, amely az objektum belső állapotát, adatait tárolja.</td>
+                <td>Az autó tulajdonságai: <code>szin = "piros"</code>, <code>sebesseg = 0</code>.</td>
+            </tr>
+            <tr>
+                <td><strong>Metódus<br>(Method)</strong></td>
+                <td>Az osztályon belül definiált **függvény**, amely az objektum viselkedését, cselekvését írja le.</td>
+                <td>Az autó képességei: <code>gyorsit()</code>, <code>fekez()</code>.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>2. Az OOP első főoszlopa: Egységbezárás (Encapsulation)</h3>
+    <ul>
+        <li><strong>Működése:</strong> Az adatok és a metódusok egy struktúrába rendezése, valamint a belső működés elrejtése a külvilág elől (**adatelrejtés**). Az objektum belső változói közvetlenül nem módosíthatók, csak az objektum által biztosított nyilvános metódusokon keresztül.</li>
+        <li><strong>Láthatósági módosítók:</strong> 
+            <ul>
+                <li><code>public</code>: Bárhonnan elérhető a külvilág számára.</li>
+                <li><code>private</code>: Kizárólag a saját osztályán belülről érhető el (adatvédelem).</li>
+            </ul>
+        </li>
+        <li><strong>Getter / Setter metódusok:</strong> Olyan ellenőrzött kapuk, amelyeken keresztül a külvilág lekérdezheti (getter) vagy módosíthatja (setter) a privát mezőket. (Pl. Az <code>set_eletkor(ertek)</code> metódusban elhelyezhető egy CHECK, hogy negatív számot ne lehessen beírni életkornak).</li>
+    </ul>
+
+    <h3>3. A második főoszlop: Örökölhetőség (Inheritance)</h3>
+    <ul>
+        <li><strong>Működése:</strong> Lehetővé teszi, hogy egy már létező osztályból (**ősosztály / szülő**) kiindulva egy új osztályt (**származtatott osztály / gyerek**) hozzunk létre. A gyerekosztály automatikusan megörökli a szülő összes mezőjét és metódusát, így a kódot nem kell újra megírni (kód-újrafelhasználás).</li>
+        <li><strong>Bővíthetőség:</strong> A gyerekosztály az örökölt dolgokon felül saját, speciális tulajdonságokat és metódusokat is kaphat.</li>
+        <li><strong>Példa:</strong> Ősosztály: <code>Jarmu</code> &rarr; Ebből örököl a <code>Szemelyauto</code> és a <code>Teherauto</code> gyerekosztály. Mindkettő tud gyorsítani és van rendszáma, de a Teherautónak van egy egyedi <code>teherbiras</code> attribútuma is.</li>
+    </ul>
+
+    <h3>4. A harmadik főoszlop: Polimorfizmus (Többalakúság / Polymorphism)</h3>
+    <ul>
+        <li><strong>Működése:</strong> Biztosítja, hogy az azonos nevű metódusok a különböző származtatott objektumokban eltérően, a saját típusuknak megfelelően működjenek (**metódus felülírás - Overriding**).</li>
+        <li><strong>Példa:</strong> Van egy közös <code>Allat</code> szülőosztályunk, aminek van egy <code>hangot_ad()</code> metódusa. Ebből létrehozzuk a <code>Kutya</code> és a <code>Macska</code> gyerekosztályokat, és mindkettőben egyedi módon felülírjuk ezt a metódust. Ha a programban meghívjuk a <code>hangot_ad()</code> parancsot egy listányi állatra, a kutya ugatni, a macska nyávogni fog, anélkül, hogy a programnak külön vizsgálnia kellene, pontosan milyen állatról van szó.</li>
+    </ul>
+
+    <div class="footer">
+        Emelt szintű digitális kultúra szóbeli vizsga — Segédlet az önálló felkészüléshez
+    </div>
+
+</body>
+</html>
